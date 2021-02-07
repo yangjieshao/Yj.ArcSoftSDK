@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <BuildX64 Condition="'$(Platform)'=='AnyCPU' OR '$(Platform)'=='x64'">True</BuildX64>
+    <BuildX86 Condition="'$(Platform)'=='AnyCPU' OR '$(Platform)'=='x86'">True</BuildX86>
+
+    <NativeFileProX86>$(MSBuildThisFileDirectory)\ArcProLib\x86\libarcsoft_face_engine.dll</NativeFileProX86>
+    <NativeFileProX64>$(MSBuildThisFileDirectory)\ArcProLib\x64\libarcsoft_face_engine.dll</NativeFileProX64>
+    <NativeFileSoProX64>$(MSBuildThisFileDirectory)\ArcProLib\Sox64\libarcsoft_face_engine.so</NativeFileSoProX64>
+
+    <ErrorMessage  Condition="'$(BuildX86)'=='True' AND !Exists('$(NativeFileProX86)')">This package do not contain necessary binary for X86 is targeted, but file $(NativeFileProX86) is missing.</ErrorMessage>
+    <ErrorMessage  Condition="'$(BuildX64)'=='True' AND !Exists('$(NativeFileProX64)')">This package do not contain necessary binary for X64 is targeted, but file $(NativeFileProX64) is missing.</ErrorMessage>
+    <ErrorMessage  Condition="'$(BuildX64)'=='True' AND !Exists('$(NativeFileSoProX64)')">This package do not contain necessary binary for X64 is targeted, but file $(NativeFileSoProX64) is missing.</ErrorMessage>
+
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(BuildX86)'=='True' AND Exists('$(NativeFileProX86)')">
+    <None Include="$(MSBuildThisFileDirectory)\ArcProLib\x86\*.dll">
+      <Link>ArcProLib\x86\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(BuildX64)'=='True' AND Exists('$(NativeFileProX64)')">
+    <None Include="$(MSBuildThisFileDirectory)\ArcProLib\x64\*.dll">
+      <Link>ArcProLib\x64\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(BuildX64)'=='True' AND Exists('$(NativeFileSoProX64)')">
+    <None Include="$(MSBuildThisFileDirectory)\ArcProLib\Sox64\*.so">
+      <Link>ArcProLib\Sox64\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="PackageBuildImports" BeforeTargets="PrepareForBuild">
+    <Error Text="'$(ErrorMessage)'" Condition="'$(ErrorMessage)'!=''" />
+    <Message Text="compiling with $(DeployMessage)binary" Condition="'$(DeployMessage)'!=''" Importance="High" />
+    <Message Text="No native binary is deployed " Condition="'$(DeployMessage)'==''" Importance="High" />
+  </Target>
+</Project>

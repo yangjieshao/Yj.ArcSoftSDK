@@ -1,0 +1,70 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net40;net5</TargetFrameworks>
+    <RootNamespace>Yj.ArcSoftSDK</RootNamespace>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Version>2020.05.11.1</Version>
+    <Authors>yangjieshao</Authors>
+    <Description>* 基于虹软的人脸识别库封装, 同时支持 windows 和 Linux
+* ASFFunctions.InitEngine 初始化引擎
+* ASFFunctions.Activation 激活注册库(需联网)
+* 最低配置：Intel® CoreTM i5-2300@2.80GHz 或者同级别芯片
+* 推荐配置：Intel® CoreTM i7-4600U@2.1GHz 或者同级别芯片
+* Window7 及以上系统
+* Ubuntu 14.04 及以上系统
+* 下载时间 2020-05-12 版本： v3.0
+* c++运行库 vc++2013
+    </Description>
+    <NoWarn>1701;1702;CS0649;S1104;S101;S4200</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DocumentationFile>.\Yj.ArcSoftSDK.xml</DocumentationFile>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="System.Drawing.Common">
+      <Version>4.5.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Text.Encoding.CodePages">
+      <Version>4.7.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net5'">
+    <PackageReference Include="System.Drawing.Common">
+      <Version>4.5.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Text.Encoding.CodePages">
+      <Version>4.7.1</Version>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ArcProLib\x64\*.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ArcProLib\x86\*.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="ArcProLib\x64\*.dll">
+      <Pack>true</Pack>
+      <PackagePath>build\ArcProLib_4_0\x64</PackagePath>
+    </Content>
+    <Content Include="ArcProLib\x86\*.dll">
+      <Pack>true</Pack>
+      <PackagePath>build\ArcProLib_4_0\x86</PackagePath>
+    </Content>
+    <Content Include="Yj.ArcSoftSDK.targets">
+      <Pack>true</Pack>
+      <PackagePath>build\Yj.ArcSoftSDK.targets</PackagePath>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Yj.ArcSoftSDK.targets">
+      <Pack>true</Pack>
+      <PackagePath>build\Yj.ArcSoftSDK.targets</PackagePath>
+    </Content>
+  </ItemGroup>
+</Project>
