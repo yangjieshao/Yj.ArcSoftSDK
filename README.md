@@ -1,12 +1,8 @@
 ﻿# 硬件要求
 最低配置：Intel® CoreTM i5-2300@2.80GHz 或者同级别芯片<br/>
 推荐配置：Intel® CoreTM i7-4600U@2.1GHz 或者同级别芯片<br/>
-下载时间 2020-05-12<br/>
-5000个年免费数量<br/>
-需每年更新dll<br/>
-版本： So64  v3.0<br/>
-版本： x86 x64 v3.1<br/>
-图片质量支持从 v3.1 开始支持
+版本： So64  v4.0<br/>
+版本： x86 x64 v4.1<br/>
 
 免费授权自行更新 
 ArcLib/Sox64/libarcsoft_face_engine.so
