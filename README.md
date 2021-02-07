@@ -2,7 +2,7 @@
 最低配置：Intel® CoreTM i5-2300@2.80GHz 或者同级别芯片<br/>
 推荐配置：Intel® CoreTM i7-4600U@2.1GHz 或者同级别芯片<br/>
 版本： So64  v4.0<br/>
-版本： x86 x64 v4.1<br/>
+版本： x86 x64 v4.0<br/>
 
 免费授权自行更新 
 ArcLib/Sox64/libarcsoft_face_engine.so
