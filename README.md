@@ -4,11 +4,6 @@
 版本： So64  v4.0<br/>
 版本： x86 x64 v4.0<br/>
 
-免费授权自行更新 
-ArcLib/Sox64/libarcsoft_face_engine.so
-.\\ArcLib\\x64\\libarcsoft_face_engine.dll
-.\\ArcLib\\x86\\libarcsoft_face_engine.dll
-
 商用授权 离线激活 将激活验证文件更名为 ArcFace64.dat ArcFace32.dat 
 
 
