@@ -10,6 +10,10 @@
 
 ArcFace64.dat ArcFace32.dat   是免费授权的授权文件名
 
+Linux
+SDK动态链接库路径 自行复制至 /usr/lib
+cp -Rf /mnt/d/Linux_x64/ArcProLib/Sox64/* /usr/lib
+
 ````
 ## 初始化虹软人脸sdk
 ````csharp
