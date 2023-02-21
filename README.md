@@ -4,7 +4,9 @@
 版本： So64  v4.0<br/>
 版本： x86 x64 v4.0<br/>
 
-商用授权 离线激活 将激活验证文件更名为 ArcFace64.dat ArcFace32.dat 
+Linux
+SDK动态链接库路径 自行复制至 /usr/lib
+cp -Rf /mnt/d/Linux_x64/ArcProLib/Sox64/* /usr/lib
 
 
 ````

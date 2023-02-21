@@ -46,12 +46,12 @@
              <param name="pEngine"></param>
              <returns></returns>
         </member>
-        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.DetectFacesEx(System.IntPtr,System.Drawing.Image,System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.DetectFacesEx(System.IntPtr,System.Byte[],System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
             <summary>
             获取人脸 信息
             </summary>
             <param name="pEngine"></param>
-            <param name="image"></param>
+            <param name="imageBuffer"></param>
             <param name="faceMinWith"></param>
             <param name="needCheckImage"></param>
             <param name="needFaceInfo">需要角度、性别、年龄信息</param>
@@ -77,12 +77,12 @@
             <param name="isRegister">算法登记照(只对4.0算法有效)</param>
             <returns></returns>
         </member>
-        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.GetFaceNum(System.IntPtr,System.Drawing.Image,System.Int32,System.Boolean)">
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.GetFaceNum(System.IntPtr,System.Byte[],System.Int32,System.Boolean)">
             <summary>
             获取人脸个数
             </summary>
             <param name="pEngine"></param>
-            <param name="image"></param>
+            <param name="imageBuffer"></param>
             <param name="faceMinWith">人脸最小宽度</param>
             <param name="needCheckImage"></param>
             <returns></returns>
@@ -250,13 +250,12 @@
              <param name="lanMaskInfo"></param>
              <returns></returns>
         </member>
-        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.SetEngineMask(System.Boolean,System.Boolean,System.Boolean,Yj.ArcSoftSDK._4_0.Models.ASF_MultiFaceInfo)">
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.SetEngineMask(System.Boolean,System.Boolean,Yj.ArcSoftSDK._4_0.Models.ASF_MultiFaceInfo)">
              <summary>
             
              </summary>
              <param name="needFaceInfo"></param>
              <param name="needRgbLive"></param>
-             <param name="needImageQuality"></param>
              <param name="multiFaceInfo"></param>
              <returns></returns>
         </member>
@@ -1022,7 +1021,7 @@
         </member>
         <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_DetectModel.ASF_DETECT_MODEL_RGB">
             <summary>
-            /RGB图像检测模型
+            RGB图像检测模型
             </summary>
         </member>
         <member name="T:Yj.ArcSoftSDK._4_0.Models.ASF_Face3DAngle">
@@ -1120,7 +1119,7 @@
         <member name="P:Yj.ArcSoftSDK._4_0.Models.FaceInfo.RgbLive">
             <summary>
             RGB 活体
-            0：非真人；1：真人；-1：不确定；-2:传入人脸数>1；
+            0：非真人；1：真人；-1：不确定；-2:传入人脸数>1；-3: 人脸过小 -4: 角度过大 -5: 人脸超出边界  -6: 深度图错误 -7: 红外图太亮了
             </summary>
         </member>
         <member name="P:Yj.ArcSoftSDK._4_0.Models.FaceInfo.IrLive">
@@ -1147,6 +1146,11 @@
         <member name="P:Yj.ArcSoftSDK._4_0.Models.FaceInfo.Mask">
             <summary>
             口罩 "0" 代表没有带口罩，"1"代表带口罩 ,"-1"表不确定
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.FaceInfo.WearGlasses">
+            <summary>
+            戴眼镜置信度[0-1],推荐阈值0.5
             </summary>
         </member>
         <member name="P:Yj.ArcSoftSDK._4_0.Models.FaceInfo.IsLeftEyeClosed">
@@ -1593,7 +1597,7 @@
         <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_LivenessInfo.IsLive">
             <summary>
             是否是真人
-            0：非真人；1：真人；-1：不确定；-2:传入人脸数>1；
+            0：非真人；1：真人；-1：不确定；-2:传入人脸数>1；-3: 人脸过小 -4: 角度过大 -5: 人脸超出边界  -6: 深度图错误 -7: 红外图太亮了
             </summary>
         </member>
         <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_LivenessInfo.Num">
@@ -1966,6 +1970,11 @@
             图片格式
             </summary>
         </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.ImageInfo.WidthStep">
+            <summary>
+            步长
+            </summary>
+        </member>
         <member name="T:Yj.ArcSoftSDK._4_0.Models.LPASF_ImageData">
              <summary>
             
@@ -2021,25 +2030,197 @@
             
              </summary>
         </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.Rectangle">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.Rectangle.Empty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.Rectangle.X">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.Rectangle.Y">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.Rectangle.Width">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.Rectangle.Height">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.Rectangle.Left">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.Rectangle.Top">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.Rectangle.Right">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.Rectangle.Bottom">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.Rectangle.IsEmpty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.Rectangle.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <param name="width"></param>
+            <param name="height"></param>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.Rectangle.FromLTRB(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="left"></param>
+            <param name="top"></param>
+            <param name="right"></param>
+            <param name="bottom"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.Rectangle.Equals(System.Object)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.Rectangle.op_Equality(Yj.ArcSoftSDK._4_0.Models.Rectangle,Yj.ArcSoftSDK._4_0.Models.Rectangle)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.Rectangle.op_Inequality(Yj.ArcSoftSDK._4_0.Models.Rectangle,Yj.ArcSoftSDK._4_0.Models.Rectangle)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.Rectangle.GetHashCode">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.Rectangle.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.PointF">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.PointF.Empty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.PointF.IsEmpty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.PointF.X">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.PointF.Y">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.#ctor(System.Single,System.Single)">
+            <summary>
+            
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <exception cref="T:System.NullReferenceException"></exception>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.Equals(Yj.ArcSoftSDK._4_0.Models.PointF)">
+            <summary>
+            
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+            <exception cref="T:System.NullReferenceException"></exception>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.Equals(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.GetHashCode">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.op_Equality(Yj.ArcSoftSDK._4_0.Models.PointF,Yj.ArcSoftSDK._4_0.Models.PointF)">
+            <summary>
+            
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.op_Inequality(Yj.ArcSoftSDK._4_0.Models.PointF,Yj.ArcSoftSDK._4_0.Models.PointF)">
+            <summary>
+            
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
         <member name="T:Yj.ArcSoftSDK._4_0.Utils.ImageUtil">
              <summary>
             
              </summary>
         </member>
-        <member name="M:Yj.ArcSoftSDK._4_0.Utils.ImageUtil.GetImageData(System.Drawing.Image,System.Boolean)">
+        <member name="M:Yj.ArcSoftSDK._4_0.Utils.ImageUtil.GetImageData(System.Drawing.Image)">
              <summary>
             
              </summary>
              <param name="inImage"></param>
-             <param name="needCheckImage"></param>
              <returns></returns>
         </member>
-        <member name="M:Yj.ArcSoftSDK._4_0.Utils.ImageUtil.GetImageData_IR(System.Drawing.Bitmap,System.Boolean)">
+        <member name="M:Yj.ArcSoftSDK._4_0.Utils.ImageUtil.GetImageData_IR(System.Drawing.Image)">
              <summary>
             
              </summary>
              <param name="inImage"></param>
-             <param name="needCheckImage"></param>
              <returns></returns>
         </member>
         <member name="M:Yj.ArcSoftSDK._4_0.Utils.ImageUtil.ReadBMP(System.Drawing.Image)">
@@ -2049,18 +2230,12 @@
             <param name="image">图片</param>
             <returns>成功或失败</returns>
         </member>
-        <member name="M:Yj.ArcSoftSDK._4_0.Utils.ImageUtil.ReadBMP_IR(System.Drawing.Bitmap)">
+        <member name="M:Yj.ArcSoftSDK._4_0.Utils.ImageUtil.ReadBMP_IR(System.Drawing.Image)">
             <summary>
             获取图片IR信息
             </summary>
-            <param name="bitmap">图片</param>
+            <param name="image">图片</param>
             <returns>成功或失败</returns>
-        </member>
-        <member name="M:Yj.ArcSoftSDK._4_0.Utils.ImageUtil.ConverGray(System.Drawing.Bitmap)">
-            <summary>
-            图像灰度化
-            </summary>
-            <param name="curBitmpap"></param>
         </member>
         <member name="M:Yj.ArcSoftSDK._4_0.Utils.ImageUtil.ScaleImage(System.Drawing.Image,System.Int32,System.Int32)">
             <summary>
@@ -2079,17 +2254,6 @@
             <param name="oldHeigt">原图片高</param>
             <param name="newWidth">目标图片宽</param>
             <param name="newHeight">目标图片高</param>
-            <returns></returns>
-        </member>
-        <member name="M:Yj.ArcSoftSDK._4_0.Utils.ImageUtil.ResetDpi(System.Drawing.Image,System.Single,System.Single,System.Boolean)">
-            <summary>
-            重设图片DPI
-            </summary>
-            <param name="image"></param>
-            <param name="xDpi"></param>
-            <param name="yDpi"></param>
-            <param name="useOldSize">使用旧照片尺寸，
-            <para>true则按比例缩放图片大小，false则按原大小填充图像</para></param>
             <returns></returns>
         </member>
         <member name="M:Yj.ArcSoftSDK._4_0.Utils.ImageUtil.CheckImage(System.Drawing.Image)">

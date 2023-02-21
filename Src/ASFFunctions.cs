@@ -1,9 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#if (NET40)
 using System.Drawing;
-#if NET5_0
-using System.Runtime.InteropServices;
+using System.IO;
+#else
+using SkiaSharp;
 #endif
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Yj.ArcSoftSDK._4_0.Models;
 using Yj.ArcSoftSDK._4_0.Utils;
 
@@ -30,94 +33,89 @@ namespace Yj.ArcSoftSDK._4_0
             , string x86ProActiveKey = null, string x64ProActiveKey = null, string sox64ProActiveKey = null)
         {
             int result = -1;
-#if NET5_0
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-#endif
-                if (
-#if NET5_0
-                    RuntimeInformation.ProcessArchitecture == Architecture.X64
+
+            if (
+#if NET5_0_OR_GREATER
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                && RuntimeInformation.ProcessArchitecture == Architecture.X64
 #else
-                    Environment.Is64BitProcess
+                Environment.Is64BitProcess
 #endif
-                    )
+                )
+            {
+                ASF_ActiveFileInfo aSF_ActiveFileInfo = default;
+                IntPtr pASF_ActiveFileInfo = MemoryUtil.Malloc(MemoryUtil.SizeOf<ASF_ActiveFileInfo>());
+
+                if (!string.IsNullOrEmpty(x64ProActiveKey))
                 {
-                    ASF_ActiveFileInfo aSF_ActiveFileInfo = default;
-                    IntPtr pASF_ActiveFileInfo = MemoryUtil.Malloc(MemoryUtil.SizeOf<ASF_ActiveFileInfo>());
+                    result = ASFFunctions_Pro_x64.ASFGetActiveFileInfo(pASF_ActiveFileInfo);
+                }
 
-                    if (!string.IsNullOrEmpty(x64ProActiveKey))
-                    {
-                        result = ASFFunctions_Pro_x64.ASFGetActiveFileInfo(pASF_ActiveFileInfo);
-                    }
+                if (result == 0)
+                {
+                    aSF_ActiveFileInfo = MemoryUtil.PtrToStructure<ASF_ActiveFileInfo>(pASF_ActiveFileInfo);
+                }
+                if (result == 0
+                    && long.TryParse(aSF_ActiveFileInfo.EndTime, out long endTime)
+                    && long.TryParse(aSF_ActiveFileInfo.StartTime, out long startTime)
+                    && (DateTime.Now.ToTimestamp() / 1000) < endTime
+                    && (DateTime.Now.ToTimestamp() / 1000) >= startTime
+                    && (aSF_ActiveFileInfo.Platform == "windows_x64" || aSF_ActiveFileInfo.SdkType == "windows_x64"))
+                {
+                    return result;
+                }
 
-                    if (result == 0)
+                if (!string.IsNullOrEmpty(x64ProActiveKey))
+                {
+                    result = ASFFunctions_Pro_x64.ASFOnlineActivation(appId, x64SdkKey, x64ProActiveKey);
+                    if (result != 0
+                        && System.IO.File.Exists("ArcFacePro64.dat"))
                     {
-                        aSF_ActiveFileInfo = MemoryUtil.PtrToStructure<ASF_ActiveFileInfo>(pASF_ActiveFileInfo);
-                    }
-                    if (result == 0 
-                        && long.TryParse(aSF_ActiveFileInfo.EndTime, out long endTime)
-                        && long.TryParse(aSF_ActiveFileInfo.StartTime, out long startTime)
-                        && (DateTime.Now.ToTimestamp() / 1000) < endTime
-                        && (DateTime.Now.ToTimestamp() / 1000) >= startTime
-                        && (aSF_ActiveFileInfo.Platform == "windows_x64" || aSF_ActiveFileInfo.SdkType == "windows_x64"))
-                    {
-                        return result;
-                    }
-
-                    if (!string.IsNullOrEmpty(x64ProActiveKey))
-                    {
+                        System.IO.File.Delete("ArcFacePro64.dat");
                         result = ASFFunctions_Pro_x64.ASFOnlineActivation(appId, x64SdkKey, x64ProActiveKey);
-                        if (result != 0
-                            && System.IO.File.Exists("ArcFacePro64.dat"))
-                        {
-                            System.IO.File.Delete("ArcFacePro64.dat");
-                            result = ASFFunctions_Pro_x64.ASFOnlineActivation(appId, x64SdkKey, x64ProActiveKey);
-                        }
                     }
-                }
-                else
-#if NET5_0
-                if (RuntimeInformation.ProcessArchitecture == Architecture.X86)
-#endif
-                {
-                    ASF_ActiveFileInfo aSF_ActiveFileInfo = default;
-                    IntPtr pASF_ActiveFileInfo = MemoryUtil.Malloc(MemoryUtil.SizeOf<ASF_ActiveFileInfo>());
-
-                    if (!string.IsNullOrEmpty(x86ProActiveKey))
-                    {
-                        result = ASFFunctions_Pro_x86.ASFGetActiveFileInfo(pASF_ActiveFileInfo);
-                    }
-
-                    if (result == 0)
-                    {
-                        aSF_ActiveFileInfo = MemoryUtil.PtrToStructure<ASF_ActiveFileInfo>(pASF_ActiveFileInfo);
-                    }
-                    if (result == 0 
-                        && long.TryParse(aSF_ActiveFileInfo.EndTime, out long endTime)
-                        && long.TryParse(aSF_ActiveFileInfo.StartTime, out long startTime)
-                        && (DateTime.Now.ToTimestamp() / 1000) < endTime
-                        && (DateTime.Now.ToTimestamp() / 1000) >= startTime
-                        && (aSF_ActiveFileInfo.Platform == "windows_x86" || aSF_ActiveFileInfo.SdkType == "windows_x86"))
-                    {
-                        return result;
-                    }
-                    if (!string.IsNullOrEmpty(x86ProActiveKey))
-                    {
-                        result = ASFFunctions_Pro_x86.ASFOnlineActivation(appId, x86SdkKey, x86ProActiveKey);
-                        if (result != 0
-                            && System.IO.File.Exists("ArcFacePro32.dat"))
-                        {
-                            System.IO.File.Delete("ArcFacePro32.dat");
-                            result = ASFFunctions_Pro_x86.ASFOnlineActivation(appId, x86SdkKey, x86ProActiveKey);
-                        }
-                    }
-                }
-#if NET5_0
-                else
-                {
-                    throw new NotSupportedException("Only supported Windows x86 x64 and Linux x64");
                 }
             }
+            else
+#if NET5_0_OR_GREATER
+            if (
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                && RuntimeInformation.ProcessArchitecture == Architecture.X86)
+#endif
+            {
+                ASF_ActiveFileInfo aSF_ActiveFileInfo = default;
+                IntPtr pASF_ActiveFileInfo = MemoryUtil.Malloc(MemoryUtil.SizeOf<ASF_ActiveFileInfo>());
+
+                if (!string.IsNullOrEmpty(x86ProActiveKey))
+                {
+                    result = ASFFunctions_Pro_x86.ASFGetActiveFileInfo(pASF_ActiveFileInfo);
+                }
+
+                if (result == 0)
+                {
+                    aSF_ActiveFileInfo = MemoryUtil.PtrToStructure<ASF_ActiveFileInfo>(pASF_ActiveFileInfo);
+                }
+                if (result == 0
+                    && long.TryParse(aSF_ActiveFileInfo.EndTime, out long endTime)
+                    && long.TryParse(aSF_ActiveFileInfo.StartTime, out long startTime)
+                    && (DateTime.Now.ToTimestamp() / 1000) < endTime
+                    && (DateTime.Now.ToTimestamp() / 1000) >= startTime
+                    && (aSF_ActiveFileInfo.Platform == "windows_x86" || aSF_ActiveFileInfo.SdkType == "windows_x86"))
+                {
+                    return result;
+                }
+                if (!string.IsNullOrEmpty(x86ProActiveKey))
+                {
+                    result = ASFFunctions_Pro_x86.ASFOnlineActivation(appId, x86SdkKey, x86ProActiveKey);
+                    if (result != 0
+                        && System.IO.File.Exists("ArcFacePro32.dat"))
+                    {
+                        System.IO.File.Delete("ArcFacePro32.dat");
+                        result = ASFFunctions_Pro_x86.ASFOnlineActivation(appId, x86SdkKey, x86ProActiveKey);
+                    }
+                }
+            }
+#if NET5_0_OR_GREATER
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64)
             {
@@ -218,43 +216,35 @@ namespace Yj.ArcSoftSDK._4_0
             }
             //初始化引擎，正常值为0，其他返回值请参考http://ai.arcsoft.com.cn/bbs/forum.php?mod=viewthread&tid=19&_dsign=dbad527e
 
-#if NET5_0
-            Console.WriteLine($"OSPlatform.Linux: {RuntimeInformation.IsOSPlatform(OSPlatform.Linux)}   Environment.Is64BitProcess: { Environment.Is64BitProcess}");
-            Console.WriteLine($"combinedMask: {combinedMask}");
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-#endif
-                if (
-#if NET5_0
-                    RuntimeInformation.ProcessArchitecture == Architecture.X64
+            if (
+#if NET5_0_OR_GREATER
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                && RuntimeInformation.ProcessArchitecture == Architecture.X64
 #else
-                    Environment.Is64BitProcess
+                Environment.Is64BitProcess
 #endif
-                    )
+                )
+            {
+                result = ASFFunctions_Pro_x64.ASFInitEngine((uint)detectMode, (int)detectFaceOrientPriority, faceMaxNum, (int)combinedMask, ref pEngine);
+                if (result == 0 && needFaceInfo)
                 {
-                    result = ASFFunctions_Pro_x64.ASFInitEngine((uint)detectMode, (int)detectFaceOrientPriority, faceMaxNum, (int)combinedMask, ref pEngine);
-                    if (result == 0 && needFaceInfo)
-                    {
-                        result = ASFFunctions_Pro_x64.ASFSetFaceShelterParam(pEngine, shelterThreshhold);
-                    }
-                }
-                else
-#if NET5_0
-                if (RuntimeInformation.ProcessArchitecture == Architecture.X86)
-#endif
-                {
-                    result = ASFFunctions_Pro_x86.ASFInitEngine((uint)detectMode, (int)detectFaceOrientPriority, faceMaxNum, (int)combinedMask, ref pEngine);
-                    if (result == 0 && needFaceInfo)
-                    {
-                        result = ASFFunctions_Pro_x86.ASFSetFaceShelterParam(pEngine, shelterThreshhold);
-                    }
-                }
-#if NET5_0
-                else
-                {
-                    throw new NotSupportedException("Only supported Windows x86 x64 and Linux x64");
+                    result = ASFFunctions_Pro_x64.ASFSetFaceShelterParam(pEngine, shelterThreshhold);
                 }
             }
+            else
+#if NET5_0_OR_GREATER
+            if (
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                && RuntimeInformation.ProcessArchitecture == Architecture.X86)
+#endif
+            {
+                result = ASFFunctions_Pro_x86.ASFInitEngine((uint)detectMode, (int)detectFaceOrientPriority, faceMaxNum, (int)combinedMask, ref pEngine);
+                if (result == 0 && needFaceInfo)
+                {
+                    result = ASFFunctions_Pro_x86.ASFSetFaceShelterParam(pEngine, shelterThreshhold);
+                }
+            }
+#if NET5_0_OR_GREATER
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64)
             {
@@ -280,33 +270,27 @@ namespace Yj.ArcSoftSDK._4_0
         public static int UninitEngine(ref IntPtr pEngine)
         {
             int result = -1;
-#if NET5_0
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-#endif
-                if (
-#if NET5_0
-                    RuntimeInformation.ProcessArchitecture == Architecture.X64
+            if (
+#if NET5_0_OR_GREATER
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                && RuntimeInformation.ProcessArchitecture == Architecture.X64
 #else
-                    Environment.Is64BitProcess
+                Environment.Is64BitProcess
 #endif
-                    )
-                {
-                    result = ASFFunctions_Pro_x64.ASFUninitEngine(pEngine);
-                }
-                else
-#if NET5_0
-                if (RuntimeInformation.ProcessArchitecture == Architecture.X86)
-#endif
-                {
-                    result = ASFFunctions_Pro_x86.ASFUninitEngine(pEngine);
-                }
-#if NET5_0
-                else
-                {
-                    throw new NotSupportedException("Only supported Windows x86 x64 and Linux x64");
-                }
+                )
+            {
+                result = ASFFunctions_Pro_x64.ASFUninitEngine(pEngine);
             }
+            else
+#if NET5_0_OR_GREATER
+            if (
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                && RuntimeInformation.ProcessArchitecture == Architecture.X86)
+#endif
+            {
+                result = ASFFunctions_Pro_x86.ASFUninitEngine(pEngine);
+            }
+#if NET5_0_OR_GREATER
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64)
             {
@@ -325,7 +309,7 @@ namespace Yj.ArcSoftSDK._4_0
         /// 获取人脸 信息
         /// </summary>
         /// <param name="pEngine"></param>
-        /// <param name="image"></param>
+        /// <param name="imageBuffer"></param>
         /// <param name="faceMinWith"></param>
         /// <param name="needCheckImage"></param>
         /// <param name="needFaceInfo">需要角度、性别、年龄信息</param>
@@ -335,16 +319,24 @@ namespace Yj.ArcSoftSDK._4_0
         /// <param name="needImageQuality"> 是否需要图像质量检测（只对虹软商用授权有效）</param>
         /// <param name="isRegister">算法登记照(只对4.0算法有效)</param>
         /// <returns></returns>
-        public static List<FaceInfo> DetectFacesEx(IntPtr pEngine, Image image, int faceMinWith = 0,
+        public static List<FaceInfo> DetectFacesEx(IntPtr pEngine, byte[] imageBuffer, int faceMinWith = 0,
             bool needCheckImage = true, bool needFaceInfo = false, bool needRgbLive = false,
             bool needIrLive = false, bool needFeatures = false, bool needImageQuality = false, bool isRegister = true)
         {
-            Image needImage = image;
+#if (NET40)
+            Image needImage = null;
+            using (MemoryStream ms = new MemoryStream(imageBuffer))
+            {
+                needImage = new Bitmap(ms);
+            }
+#else
+            SKBitmap needImage = SKBitmap.Decode(imageBuffer);
+#endif
             if (needCheckImage)
             {
                 needImage = ImageUtil.CheckImage(needImage);
             }
-            var imageInfo = ImageUtil.GetImageData(needImage, needCheckImage);
+            var imageInfo = ImageUtil.GetImageData(needImage);
             List<FaceInfo> result = DetectFacesEx(pEngine, imageInfo, faceMinWith, needFaceInfo, needRgbLive, needIrLive
                 , needFeatures, needImageQuality, isRegister);
             if(imageInfo.ppu8Plane[0]!=IntPtr.Zero)
@@ -396,10 +388,10 @@ namespace Yj.ArcSoftSDK._4_0
                 // 是否有获取RGB活体
                 bool hadRgbLive = false;
                 // 是否有获取IR活体
-                bool hadRIrLive = false;
+                bool hadIrLive = false;
 
                 IntPtr pMultiFaceInfo = IntPtr.Zero;
-                FaceEngineMask engineMask = SetEngineMask(needFaceInfo, needRgbLive, needImageQuality, multiFaceInfo);
+                FaceEngineMask engineMask = SetEngineMask(needFaceInfo, needRgbLive, multiFaceInfo);
 
                 if (engineMask != FaceEngineMask.ASF_NONE)
                 {
@@ -410,9 +402,9 @@ namespace Yj.ArcSoftSDK._4_0
                     ref maskInfo, ref lanMaskInfo);
 
                 if (needIrLive
-                    && multiFaceInfo.FaceNum == 1)
+                    /*&& multiFaceInfo.FaceNum == 1*/)
                 {
-                    hadRIrLive = true;
+                    hadIrLive = true;
                     irLiveInfo = LivenessInfoEx_IR(pEngine, imageInfoPtr, multiFaceInfo);
                 }
 
@@ -428,7 +420,7 @@ namespace Yj.ArcSoftSDK._4_0
                         result.Add(faceInfo);
 
                         SetFaceInfo(hadFaceInfo, ageInfo, genderInfo, face3DAngleInfo, rgbLiveInfo, irLiveInfo, maskInfo, lanMaskInfo, hadRgbLive,
-                            hadRIrLive, i, faceInfo);
+                            hadIrLive, i, faceInfo);
                         if (needImageQuality)
                         {
                             faceInfo.ImageQuality = ASFImageQualityDetectEx(pEngine, faceInfo.ASF_FaceInfo, imageInfoPtr, faceInfo.Mask == 1);
@@ -452,13 +444,13 @@ namespace Yj.ArcSoftSDK._4_0
         /// 获取人脸个数
         /// </summary>
         /// <param name="pEngine"></param>
-        /// <param name="image"></param>
+        /// <param name="imageBuffer"></param>
         /// <param name="faceMinWith">人脸最小宽度</param>
         /// <param name="needCheckImage"></param>
         /// <returns></returns>
-        public static int GetFaceNum(IntPtr pEngine, Image image, int faceMinWith = 0, bool needCheckImage = true)
+        public static int GetFaceNum(IntPtr pEngine, byte[] imageBuffer, int faceMinWith = 0, bool needCheckImage = true)
         {
-            return DetectFacesEx(pEngine, image, faceMinWith, needCheckImage).Count;
+            return DetectFacesEx(pEngine, imageBuffer, faceMinWith, needCheckImage).Count;
         }
 
         /// <summary>
@@ -499,34 +491,28 @@ namespace Yj.ArcSoftSDK._4_0
             float result = -1;
             int retCode = -1;
             ASF_CompareModel compareModel = isIdcardCompare ? ASF_CompareModel.ASF_ID_PHOTO : ASF_CompareModel.ASF_LIFE_PHOTO;
-#if NETSTANDARD2_0 || NET5_0
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-#endif
-                if (
-#if NET5_0
-                    RuntimeInformation.ProcessArchitecture == Architecture.X64
-#else
-                    Environment.Is64BitProcess
-#endif
-                    )
-                {
-                    retCode = ASFFunctions_Pro_x64.ASFFaceFeatureCompare(pEngine, pFaceFeature1, pFaceFeature2, ref result, (int)compareModel);
-                }
-                else
-#if NET5_0
-                if (RuntimeInformation.ProcessArchitecture == Architecture.X86)
-#endif
-                {
-                    retCode = ASFFunctions_Pro_x86.ASFFaceFeatureCompare(pEngine, pFaceFeature1, pFaceFeature2, ref result, (int)compareModel);
 
-                }
-#if NET5_0
-                else
-                {
-                    throw new NotSupportedException("Only supported Windows x86 x64 and Linux x64");
-                }
+            if (
+#if NET5_0_OR_GREATER
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                && RuntimeInformation.ProcessArchitecture == Architecture.X64
+#else
+                Environment.Is64BitProcess
+#endif
+                )
+            {
+                retCode = ASFFunctions_Pro_x64.ASFFaceFeatureCompare(pEngine, pFaceFeature1, pFaceFeature2, ref result, (int)compareModel);
             }
+            else
+#if NET5_0_OR_GREATER
+            if (
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                && RuntimeInformation.ProcessArchitecture == Architecture.X86)
+#endif
+            {
+                retCode = ASFFunctions_Pro_x86.ASFFaceFeatureCompare(pEngine, pFaceFeature1, pFaceFeature2, ref result, (int)compareModel);
+            }
+#if NET5_0_OR_GREATER
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64)
             {

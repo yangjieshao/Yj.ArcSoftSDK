@@ -26,5 +26,9 @@ namespace Yj.ArcSoftSDK._4_0.Models
         /// 图片格式
         /// </summary>
         public ASF_ImagePixelFormat Format { get; set; }
+        /// <summary>
+        /// 步长
+        /// </summary>
+        public int WidthStep { get; set; }
     }
 }

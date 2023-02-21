@@ -12,7 +12,7 @@ namespace Yj.ArcSoftSDK._4_0
         /// <summary>
         /// SDK动态链接库路径
         /// </summary>
-        public const string Dll_PATH = ".\\ArcProLib\\x64\\libarcsoft_face_engine.dll";
+        public const string Dll_PATH = ".\\ArcProLib\\x64_4.0\\libarcsoft_face_engine.dll";
 
         /// <summary>
         /// 激活人脸识别SDK引擎函数
@@ -183,7 +183,7 @@ namespace Yj.ArcSoftSDK._4_0
         /// <param name="shelterThreshhold">0.0~1.0</param>
         /// <returns></returns>
         [DllImport(Dll_PATH, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int ASFSetFaceShelterParam(IntPtr pEngine,float shelterThreshhold);
+        public static extern int ASFSetFaceShelterParam(IntPtr pEngine, float shelterThreshhold);
 
         /// <summary>
         /// 获取人脸是否戴口罩

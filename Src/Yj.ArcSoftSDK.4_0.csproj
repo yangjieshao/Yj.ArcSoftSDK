@@ -1,70 +1,74 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>net40;net5</TargetFrameworks>
-    <RootNamespace>Yj.ArcSoftSDK</RootNamespace>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>2020.05.11.1</Version>
-    <Authors>yangjieshao</Authors>
-    <Description>* 基于虹软的人脸识别库封装, 同时支持 windows 和 Linux
-* ASFFunctions.InitEngine 初始化引擎
-* ASFFunctions.Activation 激活注册库(需联网)
-* 最低配置：Intel® CoreTM i5-2300@2.80GHz 或者同级别芯片
-* 推荐配置：Intel® CoreTM i7-4600U@2.1GHz 或者同级别芯片
-* Window7 及以上系统
-* Ubuntu 14.04 及以上系统
-* 下载时间 2020-05-12 版本： v3.0
-* c++运行库 vc++2013
-    </Description>
-    <NoWarn>1701;1702;CS0649;S1104;S101;S4200</NoWarn>
-  </PropertyGroup>
-  <PropertyGroup>
-    <DocumentationFile>.\Yj.ArcSoftSDK.xml</DocumentationFile>
-    <LangVersion>7.1</LangVersion>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFrameworks>NET6.0;NET5;NET40</TargetFrameworks>
+        <RootNamespace>Yj.ArcSoftSDK._4_0</RootNamespace>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+        <Version>2021.12.01.1</Version>
+        <Authors>yangjieshao</Authors>
+        <Description>
+            * 基于虹软的人脸识别库封装, 同时支持 windows 和 Linux
+            * ASFFunctions.InitEngine 初始化引擎
+            * ASFFunctions.Activation 激活注册库(需联网)
+            * 最低配置：Intel® CoreTM i5-2300@2.80GHz 或者同级别芯片
+            * 推荐配置：Intel® CoreTM i7-4600U@2.1GHz 或者同级别芯片
+            * Window7 及以上系统
+            * Ubuntu 14.04 及以上系统
+            * 下载时间 2020-05-12 版本： v3.0
+            * c++运行库 vc++2013
+            * 虹软4.0 只有收费版
+            * Linux 需要把 ArcLib/Sox64 下的so文件复制到 /usr/lib
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="System.Drawing.Common">
-      <Version>4.5.1</Version>
-    </PackageReference>
-    <PackageReference Include="System.Text.Encoding.CodePages">
-      <Version>4.7.1</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net5'">
-    <PackageReference Include="System.Drawing.Common">
-      <Version>4.5.1</Version>
-    </PackageReference>
-    <PackageReference Include="System.Text.Encoding.CodePages">
-      <Version>4.7.1</Version>
-    </PackageReference>
-  </ItemGroup>
+            2021.06.22.1  修复了 多个人脸进入画面，对第一个人脸rgb活体检查的返回
+            2021.11.24.1  在 NET5 NET6 使用 SkiaSharp.SKBitmap 代替 System.Drawing.Bitmap
+        </Description>
+        <NoWarn>1701;1702;CS0649;S1104;S101;S4200</NoWarn>
+    </PropertyGroup>
+    <PropertyGroup>
+        <DocumentationFile>.\Wenhe.ArcSoftSDK.4_0.xml</DocumentationFile>
+        <LangVersion>7.1</LangVersion>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <None Update="ArcProLib\x64\*.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="ArcProLib\x86\*.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <Content Include="ArcProLib\x64\*.dll">
-      <Pack>true</Pack>
-      <PackagePath>build\ArcProLib_4_0\x64</PackagePath>
-    </Content>
-    <Content Include="ArcProLib\x86\*.dll">
-      <Pack>true</Pack>
-      <PackagePath>build\ArcProLib_4_0\x86</PackagePath>
-    </Content>
-    <Content Include="Yj.ArcSoftSDK.targets">
-      <Pack>true</Pack>
-      <PackagePath>build\Yj.ArcSoftSDK.targets</PackagePath>
-    </Content>
-  </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'NET5'">
+        <None Update="ArcProLib\Sox64_4.0\*.so">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <PackageReference Include="SkiaSharp" Version="2.80.3" />
+        <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.80.3" />
+    </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'NET6.0'">
+        <None Update="ArcProLib\Sox64_4.0\*.so">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <PackageReference Include="SkiaSharp" Version="2.80.3" />
+        <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.80.3" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="Yj.ArcSoftSDK.targets">
-      <Pack>true</Pack>
-      <PackagePath>build\Yj.ArcSoftSDK.targets</PackagePath>
-    </Content>
-  </ItemGroup>
+    <ItemGroup>
+        <None Update="ArcProLib\x64_4.0\*.dll">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="ArcProLib\x86_4.0\*.dll">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="ArcProLib\Sox64_4.0\*.so">
+            <Pack>true</Pack>
+            <PackagePath>build\ArcProLib\Sox64_4.0</PackagePath>
+        </Content>
+        <Content Include="ArcProLib\x64_4.0\*.dll">
+            <Pack>true</Pack>
+            <PackagePath>build\ArcProLib\x64_4.0</PackagePath>
+        </Content>
+        <Content Include="ArcProLib\x86_4.0\*.dll">
+            <Pack>true</Pack>
+            <PackagePath>build\ArcProLib\x86_4.0</PackagePath>
+        </Content>
+        <Content Include="Yj.ArcSoftSDK.4_0.targets">
+            <Pack>true</Pack>
+            <PackagePath>build\Yj.ArcSoftSDK.4_0.targets</PackagePath>
+        </Content>
+    </ItemGroup>
 </Project>

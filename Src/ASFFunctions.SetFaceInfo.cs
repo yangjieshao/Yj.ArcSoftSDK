@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Runtime.InteropServices;
 using Yj.ArcSoftSDK._4_0.Models;
 using Yj.ArcSoftSDK._4_0.Utils;
@@ -58,10 +57,10 @@ namespace Yj.ArcSoftSDK._4_0
                     var faceLandmark = MemoryUtil.PtrToStructure<ASF_FaceLandmark>(lanMaskInfo.Point + MemoryUtil.SizeOf<ASF_FaceLandmark>() * i);
                     faceInfo.FaceLandPoint = new PointF(faceLandmark.X, faceLandmark.Y);
                 }
-                else
-                {
-                    faceInfo.FaceLandPoint = new PointF(-1f, -1f);
-                }
+                //else
+                //{
+                //    faceInfo.FaceLandPoint = new PointF(-1f, -1f);
+                //}
                 if (face3DAngleInfo.Num > i)
                 {
                     faceInfo.Face3DAngle.Status = 0;
@@ -81,21 +80,23 @@ namespace Yj.ArcSoftSDK._4_0
                 faceInfo.Gender = -1;
                 faceInfo.Face3DAngle.Status = -1;
                 faceInfo.Mask = -1;
-                faceInfo.FaceLandPoint = new PointF(-1f, -1f);
+                //faceInfo.FaceLandPoint = new PointF(-1f, -1f);
             }
             if (hadRgbLive
-                && rgbLiveInfo.Num == 1)
+                //&& rgbLiveInfo.Num == 1
+                && i==0)
             {
-                faceInfo.RgbLive = MemoryUtil.PtrToStructure<int>(rgbLiveInfo.IsLive);
+                faceInfo.RgbLive = MemoryUtil.PtrToStructure<int>(rgbLiveInfo.IsLive + MemoryUtil.SizeOf<int>() * i);
             }
             else
             {
                 faceInfo.RgbLive = -2;
             }
             if (hadRIrLive
-                && irLiveInfo.Num == 1)
+                && irLiveInfo.Num == 1
+                && i == 0)
             {
-                faceInfo.IrLive = MemoryUtil.PtrToStructure<int>(irLiveInfo.IsLive);
+                faceInfo.IrLive = MemoryUtil.PtrToStructure<int>(irLiveInfo.IsLive + MemoryUtil.SizeOf<int>() * i);
             }
             else
             {
@@ -120,6 +121,7 @@ namespace Yj.ArcSoftSDK._4_0
                     FaceOrient = (ASF_OrientCode)orienArry[i],
                     FaceDataInfo = MemoryUtil.PtrToStructure<ASF_FaceDataInfo>(multiFaceInfo.FaceDataInfoList + MemoryUtil.SizeOf<ASF_FaceDataInfo>() * i),
                 },
+                WearGlasses = MemoryUtil.PtrToStructure<float>(multiFaceInfo.WearGlasses + MemoryUtil.SizeOf<float>() * i),
                 IsLeftEyeClosed = MemoryUtil.PtrToStructure<int>(multiFaceInfo.LeftEyeClosed + MemoryUtil.SizeOf<int>() * i) == 1,
                 IsRightEyeClosed = MemoryUtil.PtrToStructure<int>(multiFaceInfo.RightEyeClosed + MemoryUtil.SizeOf<int>() * i) == 1,
                 FaceShelter = MemoryUtil.PtrToStructure<int>(multiFaceInfo.FaceShelter + MemoryUtil.SizeOf<int>() * i),
@@ -225,7 +227,7 @@ namespace Yj.ArcSoftSDK._4_0
                     lanMaskInfo = FaceLandEstimation(pEngine);
                 }
                 if (needRgbLive
-                    && multiFaceInfo.FaceNum == 1)
+                   /* && multiFaceInfo.FaceNum == 1*/)
                 {
                     hadRgbLive = true;
                     rgbLiveInfo = LivenessInfo_RGB(pEngine);
@@ -250,10 +252,9 @@ namespace Yj.ArcSoftSDK._4_0
         /// </summary>
         /// <param name="needFaceInfo"></param>
         /// <param name="needRgbLive"></param>
-        /// <param name="needImageQuality"></param>
         /// <param name="multiFaceInfo"></param>
         /// <returns></returns>
-        private static FaceEngineMask SetEngineMask(bool needFaceInfo, bool needRgbLive,bool needImageQuality, ASF_MultiFaceInfo multiFaceInfo)
+        private static FaceEngineMask SetEngineMask(bool needFaceInfo, bool needRgbLive, ASF_MultiFaceInfo multiFaceInfo)
         {
             FaceEngineMask engineMask = FaceEngineMask.ASF_NONE;
             if (needFaceInfo && multiFaceInfo.FaceNum >= 1)
@@ -261,14 +262,10 @@ namespace Yj.ArcSoftSDK._4_0
                 engineMask |= FaceEngineMask.ASF_AGE | FaceEngineMask.ASF_GENDER | FaceEngineMask.ASF_FACE3DANGLE
                     | FaceEngineMask.ASF_FACELANDMARK | FaceEngineMask.ASF_MASKDETECT;// | FaceEngineMask.ASF_FACESHELTER | FaceEngineMask.ASF_UPDATE_FACEDATA;
             }
-            if (needRgbLive && multiFaceInfo.FaceNum == 1)
+            if (needRgbLive/* && multiFaceInfo.FaceNum == 1*/)
             {
                 engineMask |= FaceEngineMask.ASF_LIVENESS;
             }
-            //if (needImageQuality && multiFaceInfo.FaceNum >= 1)
-            //{
-            //    engineMask |= FaceEngineMask.ASF_IMAGEQUALITY;
-            //}
 
             return engineMask;
         }

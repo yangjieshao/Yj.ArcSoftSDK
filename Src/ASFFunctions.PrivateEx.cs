@@ -1,5 +1,5 @@
 ﻿using System;
-#if NET5_0
+#if NET5_0_OR_GREATER
 using System.Runtime.InteropServices;
 #endif
 using Yj.ArcSoftSDK._4_0.Models;
@@ -22,36 +22,31 @@ namespace Yj.ArcSoftSDK._4_0
             float result = -1;
             try
             {
-                IntPtr pSingleFaceInfo = MemoryUtil.Malloc(MemoryUtil.SizeOf<Models.ASF_SingleFaceInfo>());
+                IntPtr pSingleFaceInfo = MemoryUtil.Malloc(MemoryUtil.SizeOf<ASF_SingleFaceInfo>());
                 MemoryUtil.StructureToPtr(faceInfo, pSingleFaceInfo);
                 int retCode = -1;
-#if NET5_0
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                {
-#endif
-                    if (
-#if NET5_0
-                    RuntimeInformation.ProcessArchitecture == Architecture.X64
+
+                if (
+#if NET5_0_OR_GREATER
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                    && RuntimeInformation.ProcessArchitecture == Architecture.X64
 #else
-                    Environment.Is64BitProcess
+                Environment.Is64BitProcess
 #endif
-                    )
-                    {
-                        retCode = ASFFunctions_Pro_x64.ASFImageQualityDetectEx(pEngine, imageInfo, pSingleFaceInfo, isMask ? 1 : 0, ref result, (int)ASF_DetectModel.ASF_DETECT_MODEL_RGB);
-                    }
-                    else
-#if NET5_0
-                    if (RuntimeInformation.ProcessArchitecture == Architecture.X86)
-#endif
-                    {
-                        retCode = ASFFunctions_Pro_x86.ASFImageQualityDetectEx(pEngine, imageInfo, pSingleFaceInfo, isMask ? 1 : 0, ref result, (int)ASF_DetectModel.ASF_DETECT_MODEL_RGB);
-                    }
-#if NET5_0
-                    else
-                    {
-                        throw new NotSupportedException("Only supported Windows x86 x64 and Linux x64");
-                    }
+                )
+                {
+                    retCode = ASFFunctions_Pro_x64.ASFImageQualityDetectEx(pEngine, imageInfo, pSingleFaceInfo, isMask ? 1 : 0, ref result, (int)ASF_DetectModel.ASF_DETECT_MODEL_RGB);
                 }
+                else
+#if NET5_0_OR_GREATER
+            if (
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                && RuntimeInformation.ProcessArchitecture == Architecture.X86)
+#endif
+                {
+                    retCode = ASFFunctions_Pro_x86.ASFImageQualityDetectEx(pEngine, imageInfo, pSingleFaceInfo, isMask ? 1 : 0, ref result, (int)ASF_DetectModel.ASF_DETECT_MODEL_RGB);
+                }
+#if NET5_0_OR_GREATER
                 else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
                     && RuntimeInformation.ProcessArchitecture == Architecture.X64)
                 {
@@ -87,33 +82,28 @@ namespace Yj.ArcSoftSDK._4_0
             IntPtr pMultiFaceInfo = MemoryUtil.Malloc(MemoryUtil.SizeOf<ASF_MultiFaceInfo>());
 
             int retCode = -1;
-#if NETSTANDARD2_0 || NET5_0
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-#endif
-                if (
-#if NET5_0
-                    RuntimeInformation.ProcessArchitecture == Architecture.X64
+
+            if (
+#if NET5_0_OR_GREATER
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                && RuntimeInformation.ProcessArchitecture == Architecture.X64
 #else
-                    Environment.Is64BitProcess
+                Environment.Is64BitProcess
 #endif
-                    )
-                {
-                    retCode = ASFFunctions_Pro_x64.ASFDetectFacesEx(pEngine, imageInfo, pMultiFaceInfo, (int)ASF_DetectModel.ASF_DETECT_MODEL_RGB);
-                }
-                else
-#if NET5_0
-                if (RuntimeInformation.ProcessArchitecture == Architecture.X86)
-#endif
-                {
-                    retCode = ASFFunctions_Pro_x86.ASFDetectFacesEx(pEngine, imageInfo, pMultiFaceInfo, (int)ASF_DetectModel.ASF_DETECT_MODEL_RGB);
-                }
-#if NET5_0
-                else
-                {
-                    throw new NotSupportedException("Only supported Windows x86 x64 and Linux x64");
-                }
+                )
+            {
+                retCode = ASFFunctions_Pro_x64.ASFDetectFacesEx(pEngine, imageInfo, pMultiFaceInfo, (int)ASF_DetectModel.ASF_DETECT_MODEL_RGB);
             }
+            else
+#if NET5_0_OR_GREATER
+            if (
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                && RuntimeInformation.ProcessArchitecture == Architecture.X86)
+#endif
+            {
+                retCode = ASFFunctions_Pro_x86.ASFDetectFacesEx(pEngine, imageInfo, pMultiFaceInfo, (int)ASF_DetectModel.ASF_DETECT_MODEL_RGB);
+            }
+#if NET5_0_OR_GREATER
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64)
             {
@@ -141,38 +131,32 @@ namespace Yj.ArcSoftSDK._4_0
             byte[] feature = null;
             int retCode = -1;
 
-            IntPtr pSingleFaceInfo = MemoryUtil.Malloc(MemoryUtil.SizeOf<Models.ASF_SingleFaceInfo>());
+            IntPtr pSingleFaceInfo = MemoryUtil.Malloc(MemoryUtil.SizeOf<ASF_SingleFaceInfo>());
             MemoryUtil.StructureToPtr(faceInfo, pSingleFaceInfo);
 
             IntPtr pFaceFeature = MemoryUtil.Malloc(MemoryUtil.SizeOf<ASF_FaceFeature>());
 
-#if NET5_0
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-#endif
-                if (
-#if NET5_0
-                    RuntimeInformation.ProcessArchitecture == Architecture.X64
+            if (
+#if NET5_0_OR_GREATER
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                && RuntimeInformation.ProcessArchitecture == Architecture.X64
 #else
-                    Environment.Is64BitProcess
+                Environment.Is64BitProcess
 #endif
-                    )
-                {
-                    retCode = ASFFunctions_Pro_x64.ASFFaceFeatureExtractEx(pEngine, imageInfo, pSingleFaceInfo, (int)(isRegister ? ASF_RegisterOrNot.ASF_REGISTER : ASF_RegisterOrNot.ASF_RECOGNITION), hadMask ? 1 : 0, pFaceFeature);
-                }
-                else
-#if NET5_0
-                if (RuntimeInformation.ProcessArchitecture == Architecture.X86)
-#endif
-                {
-                    retCode = ASFFunctions_Pro_x86.ASFFaceFeatureExtractEx(pEngine, imageInfo, pSingleFaceInfo, (int)(isRegister ? ASF_RegisterOrNot.ASF_REGISTER : ASF_RegisterOrNot.ASF_RECOGNITION), hadMask ? 1 : 0, pFaceFeature);
-                }
-#if NET5_0
-                else
-                {
-                    throw new NotSupportedException("Only supported Windows x86 x64 and Linux x64");
-                }
+                )
+            {
+                retCode = ASFFunctions_Pro_x64.ASFFaceFeatureExtractEx(pEngine, imageInfo, pSingleFaceInfo, (int)(isRegister ? ASF_RegisterOrNot.ASF_REGISTER : ASF_RegisterOrNot.ASF_RECOGNITION), hadMask ? 1 : 0, pFaceFeature);
             }
+            else
+#if NET5_0_OR_GREATER
+            if (
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                && RuntimeInformation.ProcessArchitecture == Architecture.X86)
+#endif
+            {
+                retCode = ASFFunctions_Pro_x86.ASFFaceFeatureExtractEx(pEngine, imageInfo, pSingleFaceInfo, (int)(isRegister ? ASF_RegisterOrNot.ASF_REGISTER : ASF_RegisterOrNot.ASF_RECOGNITION), hadMask ? 1 : 0, pFaceFeature);
+            }
+#if NET5_0_OR_GREATER
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64)
             {
@@ -213,33 +197,28 @@ namespace Yj.ArcSoftSDK._4_0
             MemoryUtil.StructureToPtr(multiFaceInfo, pMultiFaceInfo);
 
             int retCode = -1;
-#if NETSTANDARD2_0 || NET5_0
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-#endif
-                if (
-#if NET5_0
-                    RuntimeInformation.ProcessArchitecture == Architecture.X64
+
+            if (
+#if NET5_0_OR_GREATER
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                && RuntimeInformation.ProcessArchitecture == Architecture.X64
 #else
-                    Environment.Is64BitProcess
+                Environment.Is64BitProcess
 #endif
-                    )
-                {
-                    retCode = ASFFunctions_Pro_x64.ASFProcessEx_IR(pEngine, imageInfo, pMultiFaceInfo, (int)FaceEngineMask.ASF_IR_LIVENESS);
-                }
-                else
-#if NET5_0
-                if (RuntimeInformation.ProcessArchitecture == Architecture.X86)
-#endif
-                {
-                    retCode = ASFFunctions_Pro_x86.ASFProcessEx_IR(pEngine, imageInfo, pMultiFaceInfo, (int)FaceEngineMask.ASF_IR_LIVENESS);
-                }
-#if NET5_0
-                else
-                {
-                    throw new NotSupportedException("Only supported Windows x86 x64 and Linux x64");
-                }
+                )
+            {
+                retCode = ASFFunctions_Pro_x64.ASFProcessEx_IR(pEngine, imageInfo, pMultiFaceInfo, (int)FaceEngineMask.ASF_IR_LIVENESS);
             }
+            else
+#if NET5_0_OR_GREATER
+            if (
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                && RuntimeInformation.ProcessArchitecture == Architecture.X86)
+#endif
+            {
+                retCode = ASFFunctions_Pro_x86.ASFProcessEx_IR(pEngine, imageInfo, pMultiFaceInfo, (int)FaceEngineMask.ASF_IR_LIVENESS);
+            }
+#if NET5_0_OR_GREATER
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64)
             {
@@ -253,33 +232,28 @@ namespace Yj.ArcSoftSDK._4_0
             if (retCode == 0)
             {
                 IntPtr pInfo = MemoryUtil.Malloc(MemoryUtil.SizeOf<ASF_LivenessInfo>());
-#if NET5_0
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                {
-#endif
-                    if (
-#if NET5_0
-                    RuntimeInformation.ProcessArchitecture == Architecture.X64
+
+                if (
+#if NET5_0_OR_GREATER
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                    && RuntimeInformation.ProcessArchitecture == Architecture.X64
 #else
-                    Environment.Is64BitProcess
+                Environment.Is64BitProcess
 #endif
-                    )
-                    {
-                        retCode = ASFFunctions_Pro_x64.ASFGetLivenessScore_IR(pEngine, pInfo);
-                    }
-                    else
-#if NET5_0
-                    if (RuntimeInformation.ProcessArchitecture == Architecture.X86)
-#endif
-                    {
-                        retCode = ASFFunctions_Pro_x86.ASFGetLivenessScore_IR(pEngine, pInfo);
-                    }
-#if NET5_0
-                    else
-                    {
-                        throw new NotSupportedException("Only supported Windows x86 x64 and Linux x64");
-                    }
+                )
+                {
+                    retCode = ASFFunctions_Pro_x64.ASFGetLivenessScore_IR(pEngine, pInfo);
                 }
+                else
+#if NET5_0_OR_GREATER
+            if (
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                && RuntimeInformation.ProcessArchitecture == Architecture.X86)
+#endif
+                {
+                    retCode = ASFFunctions_Pro_x86.ASFGetLivenessScore_IR(pEngine, pInfo);
+                }
+#if NET5_0_OR_GREATER
                 else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
                     && RuntimeInformation.ProcessArchitecture == Architecture.X64)
                 {
@@ -318,33 +292,28 @@ namespace Yj.ArcSoftSDK._4_0
             IntPtr pMultiFaceInfo = MemoryUtil.Malloc(MemoryUtil.SizeOf<ASF_MultiFaceInfo>());
             MemoryUtil.StructureToPtr(multiFaceInfo, pMultiFaceInfo);
             int retCode = -1;
-#if NET5_0
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-#endif
-                if (
-#if NET5_0
-                    RuntimeInformation.ProcessArchitecture == Architecture.X64
+
+            if (
+#if NET5_0_OR_GREATER
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                && RuntimeInformation.ProcessArchitecture == Architecture.X64
 #else
-                    Environment.Is64BitProcess
+                Environment.Is64BitProcess
 #endif
-                    )
-                {
-                    retCode = ASFFunctions_Pro_x64.ASFProcessEx(pEngine, imageInfo, pMultiFaceInfo, (int)faceEngineMask);
-                }
-                else
-#if NET5_0
-                if (RuntimeInformation.ProcessArchitecture == Architecture.X86)
-#endif
-                {
-                    retCode = ASFFunctions_Pro_x86.ASFProcessEx(pEngine, imageInfo, pMultiFaceInfo, (int)faceEngineMask);
-                }
-#if NET5_0
-                else
-                {
-                    throw new NotSupportedException("Only supported Windows x86 x64 and Linux x64");
-                }
+                )
+            {
+                retCode = ASFFunctions_Pro_x64.ASFProcessEx(pEngine, imageInfo, pMultiFaceInfo, (int)faceEngineMask);
             }
+            else
+#if NET5_0_OR_GREATER
+            if (
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                && RuntimeInformation.ProcessArchitecture == Architecture.X86)
+#endif
+            {
+                retCode = ASFFunctions_Pro_x86.ASFProcessEx(pEngine, imageInfo, pMultiFaceInfo, (int)faceEngineMask);
+            }
+#if NET5_0_OR_GREATER
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64)
             {

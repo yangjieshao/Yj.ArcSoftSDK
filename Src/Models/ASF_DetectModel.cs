@@ -6,7 +6,7 @@
     internal enum ASF_DetectModel
     {
         /// <summary>
-        /// /RGB图像检测模型
+        /// RGB图像检测模型
         /// </summary>
         ASF_DETECT_MODEL_RGB = 0x1,
 

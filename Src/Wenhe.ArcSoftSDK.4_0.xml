@@ -1,0 +1,2332 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Yj.ArcSoftSDK.4_0</name>
+    </assembly>
+    <members>
+        <member name="T:Yj.ArcSoftSDK._4_0.ASFFunctions">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.Activation(System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <returns></returns>
+            <summary>
+            激活SDK
+            </summary>
+            <param name="appId"></param>
+            <param name="x86SdkKey"></param>
+            <param name="x64SdkKey"></param>
+            <param name="sox64Key"></param>
+            <param name="x86ProActiveKey">永久授权版 秘钥 </param>
+            <param name="x64ProActiveKey">永久授权版 秘钥 </param>
+            <param name="sox64ProActiveKey">永久授权版 秘钥 </param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.InitEngine(System.IntPtr@,System.Boolean,System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Single)">
+            <summary>
+            初始化引擎
+            </summary>
+            <param name="pEngine"></param>
+            <param name="isImgMode"></param>
+            <param name="faceMaxNum">[1,10]</param>
+            <param name="isAngleZeroOnly"></param>
+            <param name="needFaceInfo">需要人脸信息(性别、年龄、角度)</param>
+            <param name="needRgbLive">需要rgb活体</param>
+            <param name="needIrLive">需要红外活体</param>
+            <param name="needFaceFeature"> 需要提取人脸特征值</param>
+            <param name="needImageQuality"> 是否需要图像质量检测（只对虹软商用授权有效）</param>
+            <param name="shelterThreshhold"> 设置遮挡算法检测的阈值（只对虹软4.0商用授权有效）</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.UninitEngine(System.IntPtr@)">
+             <summary>
+            
+             </summary>
+             <param name="pEngine"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.DetectFacesEx(System.IntPtr,System.Byte[],System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            获取人脸 信息
+            </summary>
+            <param name="pEngine"></param>
+            <param name="imageBuffer"></param>
+            <param name="faceMinWith"></param>
+            <param name="needCheckImage"></param>
+            <param name="needFaceInfo">需要角度、性别、年龄信息</param>
+            <param name="needRgbLive">需要RGB活体</param>
+            <param name="needIrLive">需要Ir活体</param>
+            <param name="needFeatures">需要特征值</param>
+            <param name="needImageQuality"> 是否需要图像质量检测（只对虹软商用授权有效）</param>
+            <param name="isRegister">算法登记照(只对4.0算法有效)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.DetectFacesEx(System.IntPtr,Yj.ArcSoftSDK._4_0.Models.ASVL_OFFSCREEN,System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            获取人脸 信息
+            </summary>
+            <param name="pEngine"></param>
+            <param name="imageInfo"></param>
+            <param name="faceMinWith"></param>
+            <param name="needFaceInfo">需要角度、性别、年龄信息</param>
+            <param name="needRgbLive">需要RGB活体</param>
+            <param name="needIrLive">需要Ir活体</param>
+            <param name="needFeatures">需要特征值</param>
+            <param name="needImageQuality"> 是否需要图像质量检测（只对虹软商用授权有效）</param>
+            <param name="isRegister">算法登记照(只对4.0算法有效)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.GetFaceNum(System.IntPtr,System.Byte[],System.Int32,System.Boolean)">
+            <summary>
+            获取人脸个数
+            </summary>
+            <param name="pEngine"></param>
+            <param name="imageBuffer"></param>
+            <param name="faceMinWith">人脸最小宽度</param>
+            <param name="needCheckImage"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.FaceFeatureCompare(System.IntPtr,System.Byte[],System.Byte[],System.Boolean)">
+            <summary>
+            人脸对比
+            </summary>
+            <param name="pEngine"></param>
+            <param name="feature1"></param>
+            <param name="feature2"></param>
+            <param name="isIdcardCompare">是否证件照对比</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.FaceFeatureCompare(System.IntPtr,System.IntPtr,System.IntPtr,System.Boolean)">
+            <summary>
+            人脸对比
+            </summary>
+            <param name="pEngine"></param>
+            <param name="pFaceFeature1"></param>
+            <param name="pFaceFeature2"></param>
+            <param name="isIdcardCompare">是否证件照对比</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.FreeFeatureIntPtr(System.IntPtr)">
+            <summary>
+            释放特征值指针
+            </summary>
+            <param name="featureIntPtr"></param>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.Feature2IntPtr(System.Byte[])">
+            <summary>
+            获取特征值指针
+            </summary>
+            <param name="feature"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.AgeEstimation(System.IntPtr)">
+            <summary>
+            年龄检测
+            </summary>
+            <param name="pEngine">引擎Handle</param>
+            <returns>年龄检测结构体</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.GenderEstimation(System.IntPtr)">
+            <summary>
+            性别检测
+            </summary>
+            <param name="pEngine">引擎Handle</param>
+            <returns>年龄检测结构体</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.Face3DAngleDetection(System.IntPtr)">
+            <summary>
+            人脸3D角度检测
+            </summary>
+            <param name="pEngine">引擎Handle</param>
+            <returns>年龄检测结构体</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.LivenessInfo_RGB(System.IntPtr)">
+            <summary>
+            RGB活体检测
+            </summary>
+            <param name="pEngine">引擎Handle</param>
+            <returns>年龄检测结构体</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.MaskEstimation(System.IntPtr)">
+            <summary>
+            口罩检测
+            </summary>
+            <param name="pEngine">引擎Handle</param>
+            <returns>年龄检测结构体</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.FaceLandEstimation(System.IntPtr)">
+            <summary>
+            额头检测
+            </summary>
+            <param name="pEngine">引擎Handle</param>
+            <returns>年龄检测结构体</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.ASFImageQualityDetectEx(System.IntPtr,Yj.ArcSoftSDK._4_0.Models.ASF_SingleFaceInfo,System.IntPtr,System.Boolean)">
+            <summary>
+            人脸图像质量检测
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="imageInfo">LPASF_ImageData 图像数据</param>
+            <param name="faceInfo">人脸信息</param>
+            <param name="isMask">是否带口罩 默认不带</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.DetectFaceEx(System.IntPtr,System.IntPtr)">
+             <summary>
+            
+             </summary>
+             <param name="pEngine"></param>
+             <param name="imageInfo">ASVL_OFFSCREEN</param>
+             <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.GetSinglePersonFeatureEx(System.IntPtr,Yj.ArcSoftSDK._4_0.Models.ASF_SingleFaceInfo,System.IntPtr,System.Boolean,System.Boolean)">
+            <summary>
+            获取单人人脸特征
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.LivenessInfoEx_IR(System.IntPtr,System.IntPtr,Yj.ArcSoftSDK._4_0.Models.ASF_MultiFaceInfo)">
+            <summary>
+            RGB活体检测
+            </summary>
+            <param name="pEngine">引擎Handle</param>
+            <param name="imageInfo"></param>
+            <param name="multiFaceInfo"></param>
+            <returns>年龄检测结构体</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.FaceInfoProcessEx(System.IntPtr,System.IntPtr,Yj.ArcSoftSDK._4_0.Models.ASF_MultiFaceInfo,Yj.ArcSoftSDK._4_0.Models.FaceEngineMask)">
+             <summary>
+            
+             </summary>
+             <param name="pEngine"></param>
+             <param name="imageInfo"></param>
+             <param name="multiFaceInfo"></param>
+             <param name="faceEngineMask"></param>
+             <returns>pMultiFaceInfo</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.SetFaceInfo(System.Boolean,Yj.ArcSoftSDK._4_0.Models.ASF_AgeInfo,Yj.ArcSoftSDK._4_0.Models.ASF_GenderInfo,Yj.ArcSoftSDK._4_0.Models.ASF_Face3DAngle,Yj.ArcSoftSDK._4_0.Models.ASF_LivenessInfo,Yj.ArcSoftSDK._4_0.Models.ASF_LivenessInfo,Yj.ArcSoftSDK._4_0.Models.ASF_MaskInfo,Yj.ArcSoftSDK._4_0.Models.ASF_LandMarkInfo,System.Boolean,System.Boolean,System.Int32,Yj.ArcSoftSDK._4_0.Models.FaceInfo)">
+             <summary>
+            
+             </summary>
+             <param name="hadFaceInfo"></param>
+             <param name="ageInfo"></param>
+             <param name="genderInfo"></param>
+             <param name="face3DAngleInfo"></param>
+             <param name="rgbLiveInfo"></param>
+             <param name="irLiveInfo"></param>
+             <param name="maskInfo"></param>
+             <param name="lanMaskInfo"></param>
+             <param name="hadRgbLive"></param>
+             <param name="hadRIrLive"></param>
+             <param name="i"></param>
+             <param name="faceInfo"></param>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.CreateFaceInfo(Yj.ArcSoftSDK._4_0.Models.ASF_MultiFaceInfo,System.Int32[],System.Int32)">
+             <summary>
+            
+             </summary>
+             <param name="multiFaceInfo"></param>
+             <param name="orienArry"></param>
+             <param name="i"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.ReadyFaceinStruct(System.IntPtr,System.Boolean,System.Boolean,Yj.ArcSoftSDK._4_0.Models.ASF_MultiFaceInfo,System.Boolean@,Yj.ArcSoftSDK._4_0.Models.ASF_AgeInfo@,Yj.ArcSoftSDK._4_0.Models.ASF_GenderInfo@,Yj.ArcSoftSDK._4_0.Models.ASF_Face3DAngle@,Yj.ArcSoftSDK._4_0.Models.ASF_LivenessInfo@,System.Boolean@,System.IntPtr,Yj.ArcSoftSDK._4_0.Models.ASF_MaskInfo@,Yj.ArcSoftSDK._4_0.Models.ASF_LandMarkInfo@)">
+             <summary>
+            
+             </summary>
+             <param name="pEngine"></param>
+             <param name="needFaceInfo"></param>
+             <param name="needRgbLive"></param>
+             <param name="multiFaceInfo"></param>
+             <param name="hadFaceInfo"></param>
+             <param name="ageInfo"></param>
+             <param name="genderInfo"></param>
+             <param name="face3DAngleInfo"></param>
+             <param name="rgbLiveInfo"></param>
+             <param name="hadRgbLive"></param>
+             <param name="pMultiFaceInfo"></param>
+             <param name="aSF_MaskInfo"></param>
+             <param name="lanMaskInfo"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.SetEngineMask(System.Boolean,System.Boolean,Yj.ArcSoftSDK._4_0.Models.ASF_MultiFaceInfo)">
+             <summary>
+            
+             </summary>
+             <param name="needFaceInfo"></param>
+             <param name="needRgbLive"></param>
+             <param name="multiFaceInfo"></param>
+             <returns></returns>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.Dll_PATH">
+            <summary>
+            SDK动态链接库路径 自行复制至 /usr/lib
+            <![CDATA[cp -Rf /mnt/d/Linux_x64/ArcProLib/Sox64/* /usr/lib]]>
+            </summary>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFOnlineActivation(System.String,System.String,System.String)">
+            <summary>
+            激活人脸识别SDK引擎函数
+            </summary>
+            <param name="appId">SDK对应的AppID</param>
+            <param name="sdkKey">SDK对应的SDKKey</param>
+            <param name="activeKey">授权码</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFGetActiveFileInfo(System.IntPtr)">
+            <summary>
+            获取激活文件信息接口
+            </summary>
+            <param name="activeFileInfo"></param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFInitEngine(System.UInt32,System.Int32,System.Int32,System.Int32,System.IntPtr@)">
+            <summary>
+            初始化引擎
+            </summary>
+            <param name="detectMode">AF_DETECT_MODE_VIDEO 视频模式 | AF_DETECT_MODE_IMAGE 图片模式</param>
+            <param name="detectFaceOrientPriority">检测脸部的角度优先值，推荐：ASF_OrientPriority.ASF_OP_0_HIGHER_EXT</param>
+            <param name="detectFaceMaxNum">最大需要检测的人脸个数</param>
+            <param name="combinedMask">用户选择需要检测的功能组合，可单个或多个</param>
+            <param name="pEngine">初始化返回的引擎handle</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFImageQualityDetectEx(System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.Single@,System.Int32)">
+            <summary>
+            人脸图像质量检测
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="imgData">LPASF_ImageData 图像数据</param>
+            <param name="faceInfo">人脸检测结果</param>
+            <param name="isMask">仅支持传入1、0、-1，戴口罩 1，否则认为未戴口罩</param>
+            <param name="confidenceLevel">人脸图像质量检测结果</param>
+            <param name="detectModel">预留字段 暂时使用 <see cref="F:Yj.ArcSoftSDK._4_0.Models.ASF_DetectModel.ASF_DETECT_MODEL_RGB"/></param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFDetectFacesEx(System.IntPtr,System.IntPtr,System.IntPtr,System.Int32)">
+            <summary>
+            人脸检测
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="imgData">LPASF_ImageData 图像数据</param>
+            <param name="detectedFaces">人脸检测结果</param>
+            <param name="detectModel">预留字段 暂时使用 <see cref="F:Yj.ArcSoftSDK._4_0.Models.ASF_DetectModel.ASF_DETECT_MODEL_RGB"/></param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFDetectFaces(System.IntPtr,System.Int32,System.Int32,System.Int32,System.IntPtr,System.IntPtr,System.Int32)">
+            <summary>
+            人脸检测
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="width">图像宽度</param>
+            <param name="height">图像高度</param>
+            <param name="format">图像颜色空间</param>
+            <param name="imgData">图像数据</param>
+            <param name="detectedFaces">人脸检测结果</param>
+            <param name="detectModel">预留字段 暂时使用 <see cref="F:Yj.ArcSoftSDK._4_0.Models.ASF_DetectModel.ASF_DETECT_MODEL_RGB"/></param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFSetLivenessParam(System.IntPtr,System.Double)">
+            <summary>
+            设置RGB/IR活体阈值，若不设置内部默认RGB：0.5 IR：0.7
+            </summary>
+            <param name="pEngine"></param>
+            <param name="threshold">活体阈值，推荐RGB:0.5 IR:0.7</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFProcessEx(System.IntPtr,System.IntPtr,System.IntPtr,System.Int32)">
+            <summary>
+            人脸信息检测（年龄/性别/人脸3D角度） 最多支持4张人脸信息检测，超过部分返回未知（活体仅支持单张人脸检测，超出返回未知）。
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="imgData">LPASF_ImageData 图像数据</param>
+            <param name="detectedFaces">人脸信息，用户根据待检测的功能裁减选择需要使用的人脸</param>
+            <param name="combinedMask">只支持初始化时候指定需要检测的功能，在process时进一步在这个已经指定的功能集中继续筛选例如初始化的时候指定检测年龄和性别， 在process的时候可以只检测年龄， 但是不能检测除年龄和性别之外的功能</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFProcess(System.IntPtr,System.Int32,System.Int32,System.Int32,System.IntPtr,System.IntPtr,System.Int32)">
+            <summary>
+            人脸信息检测（年龄/性别/人脸3D角度） 最多支持4张人脸信息检测，超过部分返回未知（活体仅支持单张人脸检测，超出返回未知）。
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="width">图像宽度</param>
+            <param name="height">图像高度</param>
+            <param name="format">图像颜色空间</param>
+            <param name="imgData">图像数据</param>
+            <param name="detectedFaces">人脸信息，用户根据待检测的功能裁减选择需要使用的人脸</param>
+            <param name="combinedMask">只支持初始化时候指定需要检测的功能，在process时进一步在这个已经指定的功能集中继续筛选例如初始化的时候指定检测年龄和性别， 在process的时候可以只检测年龄， 但是不能检测除年龄和性别之外的功能</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFFaceFeatureExtractEx(System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.Int32,System.IntPtr)">
+            <summary>
+            单人脸特征提取
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="imgData">LPASF_ImageData 图像数据</param>
+            <param name="faceInfo">单张人脸位置和角度信息</param>
+            <param name="registerOrNot">注册照：ASF_REGISTER  识别照：ASF_RECOGNITION</param>
+            <param name="mask">带口罩 1，否则0</param>
+            <param name="faceFeature">人脸特征</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFFaceFeatureExtract(System.IntPtr,System.Int32,System.Int32,System.Int32,System.IntPtr,System.IntPtr,System.Int32,System.Int32,System.IntPtr)">
+            <summary>
+            单人脸特征提取
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="width">图像宽度</param>
+            <param name="height">图像高度</param>
+            <param name="format">图像颜色空间</param>
+            <param name="imgData">图像数据</param>
+            <param name="faceInfo">单张人脸位置和角度信息</param>
+            <param name="registerOrNot">注册照：ASF_REGISTER  识别照：ASF_RECOGNITION</param>
+            <param name="mask">带口罩 1，否则0</param>
+            <param name="faceFeature">人脸特征</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFFaceFeatureCompare(System.IntPtr,System.IntPtr,System.IntPtr,System.Single@,System.Int32)">
+            <summary>
+            人脸特征比对
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="faceFeature1">待比较人脸特征1</param>
+            <param name="faceFeature2"> 待比较人脸特征2</param>
+            <param name="similarity">相似度(0.0~1.0)</param>
+            <param name="compareModel">选择人脸特征比对模型 <see cref="T:Yj.ArcSoftSDK._4_0.Models.ASF_CompareModel"/></param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFGetAge(System.IntPtr,System.IntPtr)">
+            <summary>
+            获取年龄信息
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="ageInfo">检测到的年龄信息</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFGetGender(System.IntPtr,System.IntPtr)">
+            <summary>
+            获取性别信息
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="genderInfo">检测到的性别信息</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFGetFace3DAngle(System.IntPtr,System.IntPtr)">
+            <summary>
+            获取3D角度信息
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="p3DAngleInfo">检测到脸部3D角度信息</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFGetLivenessScore(System.IntPtr,System.IntPtr)">
+            <summary>
+            获取RGB活体结果
+            </summary>
+            <param name="hEngine">引擎handle</param>
+            <param name="livenessInfo">活体检测信息</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFProcessEx_IR(System.IntPtr,System.IntPtr,System.IntPtr,System.Int32)">
+            <summary>
+            该接口目前仅支持单人脸IR活体检测（不支持年龄、性别、3D角度的检测），默认取第一张人脸
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="imgData">LPASF_ImageData 图片数据</param>
+            <param name="faceInfo">人脸信息，用户根据待检测的功能选择需要使用的人脸。</param>
+            <param name="combinedMask">目前只支持传入ASF_IR_LIVENESS属性的传入，且初始化接口需要传入 </param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFProcess_IR(System.IntPtr,System.Int32,System.Int32,System.Int32,System.IntPtr,System.IntPtr,System.Int32)">
+            <summary>
+            该接口目前仅支持单人脸IR活体检测（不支持年龄、性别、3D角度的检测），默认取第一张人脸
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="width">图片宽度</param>
+            <param name="height">图片高度</param>
+            <param name="format">颜色空间格式</param>
+            <param name="imgData">图片数据</param>
+            <param name="faceInfo">人脸信息，用户根据待检测的功能选择需要使用的人脸。</param>
+            <param name="combinedMask">目前只支持传入ASF_IR_LIVENESS属性的传入，且初始化接口需要传入 </param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFGetLivenessScore_IR(System.IntPtr,System.IntPtr)">
+            <summary>
+            获取IR活体结果
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="irLivenessInfo">检测到IR活体结果</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFUninitEngine(System.IntPtr)">
+            <summary>
+            销毁引擎
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFGetVersion(System.IntPtr)">
+            <summary>
+            获取版本信息
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFSetFaceShelterParam(System.IntPtr,System.Single)">
+            <summary>
+            设置遮挡算法检测的阈值
+            </summary>
+            <param name="pEngine"></param>
+            <param name="shelterThreshhold">0.0~1.0</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFGetMask(System.IntPtr,System.IntPtr)">
+            <summary>
+            获取人脸是否戴口罩
+            </summary>
+            <param name="pEngine"></param>
+            <param name="maskInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_Sox64.ASFGetFaceLandMark(System.IntPtr,System.IntPtr)">
+            <summary>
+            获取额头区域位置
+            </summary>
+            <param name="pEngine"></param>
+            <param name="landMarkInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x64">
+            <summary>
+            SDK中与人脸识别相关函数封装类
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x64.Dll_PATH">
+            <summary>
+            SDK动态链接库路径
+            </summary>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x64.ASFOnlineActivation(System.String,System.String,System.String)">
+            <summary>
+            激活人脸识别SDK引擎函数
+            </summary>
+            <param name="appId">SDK对应的AppID</param>
+            <param name="sdkKey">SDK对应的SDKKey</param>
+            <param name="activeKey">授权码</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x64.ASFGetActiveFileInfo(System.IntPtr)">
+            <summary>
+            获取激活文件信息接口
+            </summary>
+            <param name="activeFileInfo"></param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x64.ASFInitEngine(System.UInt32,System.Int32,System.Int32,System.Int32,System.IntPtr@)">
+            <summary>
+            初始化引擎
+            </summary>
+            <param name="detectMode">AF_DETECT_MODE_VIDEO 视频模式 | AF_DETECT_MODE_IMAGE 图片模式</param>
+            <param name="detectFaceOrientPriority">检测脸部的角度优先值，推荐：ASF_OrientPriority.ASF_OP_0_HIGHER_EXT</param>
+            <param name="detectFaceMaxNum">最大需要检测的人脸个数</param>
+            <param name="combinedMask">用户选择需要检测的功能组合，可单个或多个</param>
+            <param name="pEngine">初始化返回的引擎handle</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x64.ASFImageQualityDetectEx(System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.Single@,System.Int32)">
+            <summary>
+            人脸图像质量检测
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="imgData">LPASF_ImageData 图像数据</param>
+            <param name="faceInfo">人脸检测结果</param>
+            <param name="isMask">仅支持传入1、0、-1，戴口罩 1，否则认为未戴口罩</param>
+            <param name="confidenceLevel">人脸图像质量检测结果</param>
+            <param name="detectModel">预留字段 暂时使用 <see cref="F:Yj.ArcSoftSDK._4_0.Models.ASF_DetectModel.ASF_DETECT_MODEL_RGB"/></param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x64.ASFDetectFacesEx(System.IntPtr,System.IntPtr,System.IntPtr,System.Int32)">
+            <summary>
+            人脸检测
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="imgData">LPASF_ImageData 图像数据</param>
+            <param name="detectedFaces">人脸检测结果</param>
+            <param name="detectModel">预留字段 暂时使用 <see cref="F:Yj.ArcSoftSDK._4_0.Models.ASF_DetectModel.ASF_DETECT_MODEL_RGB"/></param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x64.ASFProcessEx(System.IntPtr,System.IntPtr,System.IntPtr,System.Int32)">
+            <summary>
+            人脸信息检测（年龄/性别/人脸3D角度） 最多支持4张人脸信息检测，超过部分返回未知（活体仅支持单张人脸检测，超出返回未知）。
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="imgData">LPASF_ImageData 图像数据</param>
+            <param name="detectedFaces">人脸信息，用户根据待检测的功能裁减选择需要使用的人脸</param>
+            <param name="combinedMask">只支持初始化时候指定需要检测的功能，在process时进一步在这个已经指定的功能集中继续筛选例如初始化的时候指定检测年龄和性别， 在process的时候可以只检测年龄， 但是不能检测除年龄和性别之外的功能</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x64.ASFFaceFeatureExtractEx(System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.Int32,System.IntPtr)">
+            <summary>
+            单人脸特征提取
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="imgData">LPASF_ImageData 图像数据</param>
+            <param name="faceInfo">单张人脸位置和角度信息</param>
+            <param name="registerOrNot">注册照：ASF_REGISTER  识别照：ASF_RECOGNITION</param>
+            <param name="mask">带口罩 1，否则0</param>
+            <param name="faceFeature">人脸特征</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x64.ASFFaceFeatureCompare(System.IntPtr,System.IntPtr,System.IntPtr,System.Single@,System.Int32)">
+            <summary>
+            人脸特征比对
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="faceFeature1">待比较人脸特征1</param>
+            <param name="faceFeature2"> 待比较人脸特征2</param>
+            <param name="similarity">相似度(0.0~1.0)</param>
+            <param name="compareModel">选择人脸特征比对模型 <see cref="T:Yj.ArcSoftSDK._4_0.Models.ASF_CompareModel"/></param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x64.ASFGetAge(System.IntPtr,System.IntPtr)">
+            <summary>
+            获取年龄信息
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="ageInfo">检测到的年龄信息</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x64.ASFGetGender(System.IntPtr,System.IntPtr)">
+            <summary>
+            获取性别信息
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="genderInfo">检测到的性别信息</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x64.ASFGetFace3DAngle(System.IntPtr,System.IntPtr)">
+            <summary>
+            获取3D角度信息
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="p3DAngleInfo">检测到脸部3D角度信息</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x64.ASFGetLivenessScore(System.IntPtr,System.IntPtr)">
+            <summary>
+            获取RGB活体结果
+            </summary>
+            <param name="hEngine">引擎handle</param>
+            <param name="livenessInfo">活体检测信息</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x64.ASFProcessEx_IR(System.IntPtr,System.IntPtr,System.IntPtr,System.Int32)">
+            <summary>
+            该接口目前仅支持单人脸IR活体检测（不支持年龄、性别、3D角度的检测），默认取第一张人脸
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="imgData">LPASF_ImageData 图片数据</param>
+            <param name="faceInfo">人脸信息，用户根据待检测的功能选择需要使用的人脸。</param>
+            <param name="combinedMask">目前只支持传入ASF_IR_LIVENESS属性的传入，且初始化接口需要传入 </param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x64.ASFGetLivenessScore_IR(System.IntPtr,System.IntPtr)">
+            <summary>
+            获取IR活体结果
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="irLivenessInfo">检测到IR活体结果</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x64.ASFUninitEngine(System.IntPtr)">
+            <summary>
+            销毁引擎
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x64.ASFGetVersion(System.IntPtr)">
+            <summary>
+            获取版本信息
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x64.ASFSetFaceShelterParam(System.IntPtr,System.Single)">
+            <summary>
+            设置遮挡算法检测的阈值
+            </summary>
+            <param name="pEngine"></param>
+            <param name="shelterThreshhold">0.0~1.0</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x64.ASFGetMask(System.IntPtr,System.IntPtr)">
+            <summary>
+            获取人脸是否戴口罩
+            </summary>
+            <param name="pEngine"></param>
+            <param name="maskInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x64.ASFGetFaceLandMark(System.IntPtr,System.IntPtr)">
+            <summary>
+            获取额头区域位置
+            </summary>
+            <param name="pEngine"></param>
+            <param name="landMarkInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86">
+            <summary>
+            SDK中与人脸识别相关函数封装类
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.Dll_PATH">
+            <summary>
+            SDK动态链接库路径
+            </summary>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFOnlineActivation(System.String,System.String,System.String)">
+            <summary>
+            激活人脸识别SDK引擎函数
+            </summary>
+            <param name="appId">SDK对应的AppID</param>
+            <param name="sdkKey">SDK对应的SDKKey</param>
+            <param name="activeKey">授权码</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFGetActiveFileInfo(System.IntPtr)">
+            <summary>
+            获取激活文件信息接口
+            </summary>
+            <param name="activeFileInfo"></param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFInitEngine(System.UInt32,System.Int32,System.Int32,System.Int32,System.IntPtr@)">
+            <summary>
+            初始化引擎
+            </summary>
+            <param name="detectMode">AF_DETECT_MODE_VIDEO 视频模式 | AF_DETECT_MODE_IMAGE 图片模式</param>
+            <param name="detectFaceOrientPriority">检测脸部的角度优先值，推荐：ASF_OrientPriority.ASF_OP_0_HIGHER_EXT</param>
+            <param name="detectFaceMaxNum">最大需要检测的人脸个数</param>
+            <param name="combinedMask">用户选择需要检测的功能组合，可单个或多个</param>
+            <param name="pEngine">初始化返回的引擎handle</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFImageQualityDetectEx(System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.Single@,System.Int32)">
+            <summary>
+            人脸图像质量检测
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="imgData">LPASF_ImageData 图像数据</param>
+            <param name="faceInfo">人脸检测结果</param>
+            <param name="isMask">仅支持传入1、0、-1，戴口罩 1，否则认为未戴口罩</param>
+            <param name="confidenceLevel">人脸图像质量检测结果</param>
+            <param name="detectModel">预留字段 暂时使用 <see cref="F:Yj.ArcSoftSDK._4_0.Models.ASF_DetectModel.ASF_DETECT_MODEL_RGB"/></param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFDetectFacesEx(System.IntPtr,System.IntPtr,System.IntPtr,System.Int32)">
+            <summary>
+            人脸检测
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="imgData">LPASF_ImageData 图像数据</param>
+            <param name="detectedFaces">人脸检测结果</param>
+            <param name="detectModel">预留字段 暂时使用 <see cref="F:Yj.ArcSoftSDK._4_0.Models.ASF_DetectModel.ASF_DETECT_MODEL_RGB"/></param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFDetectFaces(System.IntPtr,System.Int32,System.Int32,System.Int32,System.IntPtr,System.IntPtr,System.Int32)">
+            <summary>
+            人脸检测
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="width">图像宽度</param>
+            <param name="height">图像高度</param>
+            <param name="format">图像颜色空间</param>
+            <param name="imgData">图像数据</param>
+            <param name="detectedFaces">人脸检测结果</param>
+            <param name="detectModel">预留字段 暂时使用 <see cref="F:Yj.ArcSoftSDK._4_0.Models.ASF_DetectModel.ASF_DETECT_MODEL_RGB"/></param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFSetLivenessParam(System.IntPtr,System.Double)">
+            <summary>
+            设置RGB/IR活体阈值，若不设置内部默认RGB：0.5 IR：0.7
+            </summary>
+            <param name="pEngine"></param>
+            <param name="threshold">活体阈值，推荐RGB:0.5 IR:0.7</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFProcessEx(System.IntPtr,System.IntPtr,System.IntPtr,System.Int32)">
+            <summary>
+            人脸信息检测（年龄/性别/人脸3D角度） 最多支持4张人脸信息检测，超过部分返回未知（活体仅支持单张人脸检测，超出返回未知）。
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="imgData">LPASF_ImageData 图像数据</param>
+            <param name="detectedFaces">人脸信息，用户根据待检测的功能裁减选择需要使用的人脸</param>
+            <param name="combinedMask">只支持初始化时候指定需要检测的功能，在process时进一步在这个已经指定的功能集中继续筛选例如初始化的时候指定检测年龄和性别， 在process的时候可以只检测年龄， 但是不能检测除年龄和性别之外的功能</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFProcess(System.IntPtr,System.Int32,System.Int32,System.Int32,System.IntPtr,System.IntPtr,System.Int32)">
+            <summary>
+            人脸信息检测（年龄/性别/人脸3D角度） 最多支持4张人脸信息检测，超过部分返回未知（活体仅支持单张人脸检测，超出返回未知）。
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="width">图像宽度</param>
+            <param name="height">图像高度</param>
+            <param name="format">图像颜色空间</param>
+            <param name="imgData">图像数据</param>
+            <param name="detectedFaces">人脸信息，用户根据待检测的功能裁减选择需要使用的人脸</param>
+            <param name="combinedMask">只支持初始化时候指定需要检测的功能，在process时进一步在这个已经指定的功能集中继续筛选例如初始化的时候指定检测年龄和性别， 在process的时候可以只检测年龄， 但是不能检测除年龄和性别之外的功能</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFFaceFeatureExtractEx(System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.Int32,System.IntPtr)">
+            <summary>
+            单人脸特征提取
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="imgData">LPASF_ImageData 图像数据</param>
+            <param name="faceInfo">单张人脸位置和角度信息</param>
+            <param name="registerOrNot">注册照：ASF_REGISTER  识别照：ASF_RECOGNITION</param>
+            <param name="mask">带口罩 1，否则0</param>
+            <param name="faceFeature">人脸特征</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFFaceFeatureExtract(System.IntPtr,System.Int32,System.Int32,System.Int32,System.IntPtr,System.IntPtr,System.Int32,System.Int32,System.IntPtr)">
+            <summary>
+            单人脸特征提取
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="width">图像宽度</param>
+            <param name="height">图像高度</param>
+            <param name="format">图像颜色空间</param>
+            <param name="imgData">图像数据</param>
+            <param name="faceInfo">单张人脸位置和角度信息</param>
+            <param name="registerOrNot">注册照：ASF_REGISTER  识别照：ASF_RECOGNITION</param>
+            <param name="mask">带口罩 1，否则0</param>
+            <param name="faceFeature">人脸特征</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFFaceFeatureCompare(System.IntPtr,System.IntPtr,System.IntPtr,System.Single@,System.Int32)">
+            <summary>
+            人脸特征比对
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="faceFeature1">待比较人脸特征1</param>
+            <param name="faceFeature2"> 待比较人脸特征2</param>
+            <param name="similarity">相似度(0.0~1.0)</param>
+            <param name="compareModel">选择人脸特征比对模型 <see cref="T:Yj.ArcSoftSDK._4_0.Models.ASF_CompareModel"/></param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFGetAge(System.IntPtr,System.IntPtr)">
+            <summary>
+            获取年龄信息
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="ageInfo">检测到的年龄信息</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFGetGender(System.IntPtr,System.IntPtr)">
+            <summary>
+            获取性别信息
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="genderInfo">检测到的性别信息</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFGetFace3DAngle(System.IntPtr,System.IntPtr)">
+            <summary>
+            获取3D角度信息
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="p3DAngleInfo">检测到脸部3D角度信息</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFGetLivenessScore(System.IntPtr,System.IntPtr)">
+            <summary>
+            获取RGB活体结果
+            </summary>
+            <param name="hEngine">引擎handle</param>
+            <param name="livenessInfo">活体检测信息</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFProcessEx_IR(System.IntPtr,System.IntPtr,System.IntPtr,System.Int32)">
+            <summary>
+            该接口目前仅支持单人脸IR活体检测（不支持年龄、性别、3D角度的检测），默认取第一张人脸
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="imgData">LPASF_ImageData 图片数据</param>
+            <param name="faceInfo">人脸信息，用户根据待检测的功能选择需要使用的人脸。</param>
+            <param name="combinedMask">目前只支持传入ASF_IR_LIVENESS属性的传入，且初始化接口需要传入 </param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFProcess_IR(System.IntPtr,System.Int32,System.Int32,System.Int32,System.IntPtr,System.IntPtr,System.Int32)">
+            <summary>
+            该接口目前仅支持单人脸IR活体检测（不支持年龄、性别、3D角度的检测），默认取第一张人脸
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="width">图片宽度</param>
+            <param name="height">图片高度</param>
+            <param name="format">颜色空间格式</param>
+            <param name="imgData">图片数据</param>
+            <param name="faceInfo">人脸信息，用户根据待检测的功能选择需要使用的人脸。</param>
+            <param name="combinedMask">目前只支持传入ASF_IR_LIVENESS属性的传入，且初始化接口需要传入 </param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFGetLivenessScore_IR(System.IntPtr,System.IntPtr)">
+            <summary>
+            获取IR活体结果
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <param name="irLivenessInfo">检测到IR活体结果</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFUninitEngine(System.IntPtr)">
+            <summary>
+            销毁引擎
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFGetVersion(System.IntPtr)">
+            <summary>
+            获取版本信息
+            </summary>
+            <param name="pEngine">引擎handle</param>
+            <returns>调用结果</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFSetFaceShelterParam(System.IntPtr,System.Single)">
+            <summary>
+            设置遮挡算法检测的阈值
+            </summary>
+            <param name="pEngine"></param>
+            <param name="shelterThreshhold">0.0~1.0</param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFGetMask(System.IntPtr,System.IntPtr)">
+            <summary>
+            获取人脸是否戴口罩
+            </summary>
+            <param name="pEngine"></param>
+            <param name="maskInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions_Pro_x86.ASFGetFaceLandMark(System.IntPtr,System.IntPtr)">
+            <summary>
+            获取额头区域位置
+            </summary>
+            <param name="pEngine"></param>
+            <param name="landMarkInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ASF_ActiveFileInfo">
+            <summary>
+            激活文件信息 (4.1算法)
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ActiveFileInfo.StartTime">
+            <summary>
+            开始时间 精度到毫秒的时间戳
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ActiveFileInfo.EndTime">
+            <summary>
+            截止时间 精度到毫秒的时间戳
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ActiveFileInfo.ActiveKey">
+            <summary>
+            激活码
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ActiveFileInfo.Platform">
+            <summary>
+            平台
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ActiveFileInfo.SdkType">
+            <summary>
+            sdk类型
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ActiveFileInfo.AppId">
+            <summary>
+            APPID
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ActiveFileInfo.SdkKey">
+            <summary>
+            SDKKEY
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ActiveFileInfo.SdkVersion">
+            <summary>
+            SDK版本号
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ActiveFileInfo.FileVersion">
+            <summary>
+            激活文件版本号
+            </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ASF_AgeInfo">
+            <summary>
+            年龄结果结构体
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_AgeInfo.AgeArray">
+            <summary>
+            年龄检测结果集合
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_AgeInfo.Num">
+            <summary>
+            结果集大小
+            </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ASF_CompareModel">
+            <summary>
+            根据应用场景选择对应的模型进行人脸特征比对
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_CompareModel.ASF_LIFE_PHOTO">
+            <summary>
+            用于生活照之间的特征比对，推荐阈值0.80
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_CompareModel.ASF_ID_PHOTO">
+            <summary>
+            用于证件照或生活照与证件照之间的特征比对，推荐阈值0.82
+            </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ASF_DetectMode">
+            <summary>
+            图片检测模式
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_DetectMode.ASF_DETECT_MODE_VIDEO">
+            <summary>
+            Video模式，一般用于多帧连续检测
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_DetectMode.ASF_DETECT_MODE_IMAGE">
+            <summary>
+            Image模式，一般用于静态图的单次检测
+            </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ASF_DetectModel">
+            <summary>
+            检测模型
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_DetectModel.ASF_DETECT_MODEL_RGB">
+            <summary>
+            RGB图像检测模型
+            </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ASF_Face3DAngle">
+            <summary>
+            3D人脸角度检测结构体
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_Face3DAngle.Roll">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_Face3DAngle.Yaw">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_Face3DAngle.Pitch">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_Face3DAngle.Num">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ASF_FaceDataInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_FaceDataInfo.Data">
+            <summary>
+            人脸信息
+            <para> FACE_DATA_SIZE 5000</para>
+            do not free by self !!!
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_FaceDataInfo.DataSize">
+            <summary>
+            人脸信息长度
+            </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ASF_FaceFeature">
+            <summary>
+            人脸特征结构体
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_FaceFeature.Feature">
+            <summary>
+            特征值 byte[]
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_FaceFeature.FeatureSize">
+            <summary>
+            结果集大小
+            </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.FaceInfo">
+            <summary>
+            人脸信息
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.FaceInfo.ASF_FaceInfo">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.FaceInfo.Rectangle">
+            <summary>
+            人脸坐标Rect结果
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.FaceInfo.FaceOrient">
+            <summary>
+            头像角度
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.FaceInfo.Gender">
+            <summary>
+            0：男；1：女；
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.FaceInfo.Age">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.FaceInfo.Face3DAngle">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.FaceInfo.RgbLive">
+            <summary>
+            RGB 活体
+            0：非真人；1：真人；-1：不确定；-2:传入人脸数>1；-3: 人脸过小 -4: 角度过大 -5: 人脸超出边界  -6: 深度图错误 -7: 红外图太亮了
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.FaceInfo.IrLive">
+            <summary>
+            红外 活体
+            0：非真人；1：真人；-1：不确定；-2:传入人脸数>1；
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.FaceInfo.Feature">
+            <summary>
+            特征
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.FaceInfo.FaceID">
+            <summary>
+             face ID，IMAGE模式下不返回FaceID
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.FaceInfo.ImageQuality">
+            <summary>
+            图像质量 -1无效
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.FaceInfo.Mask">
+            <summary>
+            口罩 "0" 代表没有带口罩，"1"代表带口罩 ,"-1"表不确定
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.FaceInfo.WearGlasses">
+            <summary>
+            戴眼镜置信度[0-1],推荐阈值0.5
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.FaceInfo.IsLeftEyeClosed">
+            <summary>
+            左眼状态
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.FaceInfo.IsRightEyeClosed">
+            <summary>
+            右眼状态
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.FaceInfo.FaceShelter">
+            <summary>
+            "1" 表示 遮挡, "0" 表示 未遮挡, "-1" 表示不确定
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.FaceInfo.FaceLandPoint">
+            <summary>
+            额头坐标 Empty 表示无效
+            </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.Face3DAngle">
+            <summary>
+            3D人脸角度检测
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.Face3DAngle.Status">
+            <summary>
+            是否检测成功，0成功，其他为失败
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.Face3DAngle.Roll">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.Face3DAngle.Yaw">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.Face3DAngle.Pitch">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ASF_LandMarkInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_LandMarkInfo.Point">
+            <summary>
+            <see cref="T:Yj.ArcSoftSDK._4_0.Models.ASF_FaceLandmark"/>
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_LandMarkInfo.Num">
+            <summary>
+            结果集大小
+            </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ASF_FaceLandmark">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_FaceLandmark.X">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_FaceLandmark.Y">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ASF_GenderInfo">
+            <summary>
+            性别结构体
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_GenderInfo.GenderArray">
+            <summary>
+            性别检测结果集合
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_GenderInfo.Num">
+            <summary>
+            结果集大小
+            </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_NV21">
+            <summary>
+            8-bit Y 通道，8-bit 2x2 采样 V 与 U 分量交织通道
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_NV12">
+            <summary>
+            8-bit Y 通道，8-bit 2x2 采样 U 与 V 分量交织通道
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RGB24_B8G8R8">
+            <summary>
+            RGB 分量交织，按 B, G, R, B 字节序排布
+            <para>R	R  R  R	 R	R  R  R  G  G  G  G  G  G  G  G  B  B  B  B  B  B  B  B</para>
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_YUYV">
+            <summary>
+            YUV 分量交织， V 与 U 分量 2x1 采样，按 Y0, U0, Y1, V0 字节序排布
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_DEPTH_U16">
+            <summary>
+            16-bit IR图像
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RGB16_B5G6R5">
+            <summary>
+            R  R  R  R  R  G  G  G  G  G  G  B  B  B  B  B
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RGB16_B5G5R5">
+            <summary>
+            X  R  R  R  R  R  G  G  G  G  G  B  B  B  B  B
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RGB16_B4G4R4">
+            <summary>
+            X  X  X  X  R  R  R  R  G  G  G  G  B  B  B  B
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RGB16_B5G5R5T">
+            <summary>
+            T  R  R  R  R  R  G  G  G  G  G  B  B  B  B  B
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RGB16_R5G6B5">
+            <summary>
+            B  B  B  B  B  G  G  G  G  G  G  R  R  R  R  R
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RGB16_R5G5B5">
+            <summary>
+            X  B  B  B  B  B  G  G  G  G  G  R  R  R  R  R
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RGB16_R4G4B4">
+            <summary>
+             X  X  X  X  B  B  B  B  G  G  G  G  R  R  R  R
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RGB24_B6G6R6">
+            <summary>
+            X	X  X  X	 X	X  R  R  R  R  R  R  G  G  G  G  G  G  B  B  B  B  B  B
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RGB24_B6G6R6T">
+            <summary>
+            X	X  X  X	 X	T  R  R  R  R  R  R  G  G  G  G  G  G  B  B  B  B  B  B
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RGB24_R8G8B8">
+            <summary>
+             B  B  B  B  B  B  B  B  G  G  G  G  G  G  G  G  R	R  R  R	 R	R  R  R
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RGB24_R6G6B6">
+            <summary>
+            X	X  X  X	 X	X  B  B  B  B  B  B  G  G  G  G  G  G  R  R  R  R  R  R
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RGB32_B8G8R8">
+            <summary>
+            X	X  X  X	 X	X  X  X	 R	R  R  R	 R	R  R  R  G  G  G  G  G  G  G  G  B  B  B  B  B  B  B  B
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RGB32_B8G8R8A8">
+            <summary>
+            A	A  A  A	 A	A  A  A	 R	R  R  R	 R	R  R  R  G  G  G  G  G  G  G  G  B  B  B  B  B  B  B  B
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RGB32_R8G8B8">
+            <summary>
+            X	X  X  X	 X	X  X  X	 B  B  B  B  B  B  B  B  G  G  G  G  G  G  G  G  R	R  R  R	 R	R  R  R
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RGB32_A8R8G8B8">
+            <summary>
+            B    B  B  B  B  B  B  B  G  G  G  G  G  G  G  G  R  R  R  R  R  R  R  R  A	A  A  A  A	A  A  A
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RGB32_R8G8B8A8">
+            <summary>
+            A    A  A  A  A  A  A  A  B  B  B  B  B  B  B  B  G  G  G  G  G  G  G  G  R  R  R  R  R	R  R  R
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_YUV">
+            <summary>
+            Y0, U0, V0
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_YVU">
+            <summary>
+            Y0, V0, U0
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_UVY">
+            <summary>
+            U0, V0, Y0
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_VUY">
+            <summary>
+            V0, U0, Y0
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_YVYU">
+            <summary>
+            Y0, V0, Y1, U0
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_UYVY">
+            <summary>
+            U0, Y0, V0, Y1
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_VYUY">
+            <summary>
+            V0, Y0, U0, Y1
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_YUYV2">
+            <summary>
+            Y1, U0, Y0, V0
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_YVYU2">
+            <summary>
+            Y1, V0, Y0, U0
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_UYVY2">
+            <summary>
+            U0, Y1, V0, Y0
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_VYUY2">
+            <summary>
+            V0, Y1, U0, Y0
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_YYUV">
+            <summary>
+            Y0, Y1, U0, V0
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_I420">
+            <summary>
+            8-bit Y 通道， 8-bit 2x2 采样 U 通道， 8-bit 2x2 采样 V 通道
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_I422V">
+            <summary>
+            8 bit Y plane followed by 8 bit 1x2 subsampled U and V planes
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_I422H">
+            <summary>
+            8 bit Y plane followed by 8 bit ,2x1 subsampled U and V planes
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_I444">
+            <summary>
+            8 bit Y plane followed by 8 bit U and V planes
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_YV12">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_YV16V">
+            <summary>
+            8 bit Y plane followed by 8 bit 1x2 subsampled V and U planes
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_YV16H">
+            <summary>
+            8 bit Y plane followed by 8 bit 2x1 subsampled V and U planes
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_YV24">
+            <summary>
+            8 bit Y plane followed by 8 bit V and U planes
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_GRAY">
+            <summary>
+            8-bit IR图像
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_LPI422H">
+            <summary>
+            8 bit Y plane followed by 8 bit 2x1 subsampled UV planes
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_LPI422H2">
+            <summary>
+            8 bit Y plane followed by 8 bit 2x1 subsampled VU planes
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_NV41">
+            <summary>
+            8 bit Y plane followed by 8 bit 4x4 subsampled VU planes
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_NEG_UYVY">
+            <summary>
+            Negative UYVY, U0, Y0, V0, Y1
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_NEG_I420">
+            <summary>
+            Negative I420, 8 bit Y plane followed by 8 bit 2x2 subsampled U and V planes
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_MONO_UYVY">
+            <summary>
+            Mono UYVY, UV values are fixed, gray image in U0, Y0, V0, Y1
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_MONO_I420">
+            <summary>
+            Mono I420, UV values are fixed, 8 bit Y plane followed by 8 bit 2x2 subsampled U and V planes
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_P8_YUYV">
+            <summary>
+            P8_YUYV, 8 pixels a group, Y0Y1Y2Y3Y4Y5Y6Y7U0U1U2U3V0V1V2V3
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_SP16UNIT">
+            <summary>
+            P16_YUYV, 16*16 pixels a group, Y0Y1Y2Y3...U0U1...V0V1...
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RAW10_RGGB_10B">
+            <summary>
+            10 bits RGGB CFA raw data, each data has 2 bytes
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RAW10_GRBG_10B">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RAW10_GBRG_10B">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RAW10_BGGR_10B">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RAW12_RGGB_12B">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RAW12_GRBG_12B">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RAW12_GBRG_12B">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RAW12_BGGR_12B">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RAW10_RGGB_16B">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RAW10_GRBG_16B">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RAW10_GBRG_16B">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RAW10_BGGR_16B">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RAW10_GRAY_10B">
+            <summary>
+            10 bits gray raw data
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImagePixelFormat.ASVL_PAF_RAW10_GRAY_16B">
+            <summary>
+            10 bits gray raw data, each data has 2 bytes
+            </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ASF_ImageQualityInfo">
+            <summary>
+            图像质量信息
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImageQualityInfo.FaceQualityValue">
+            <summary>
+            人脸质量 float
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_ImageQualityInfo.Num">
+            <summary>
+            检测到的人脸数
+            </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ASF_LivenessInfo">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_LivenessInfo.IsLive">
+            <summary>
+            是否是真人
+            0：非真人；1：真人；-1：不确定；-2:传入人脸数>1；-3: 人脸过小 -4: 角度过大 -5: 人脸超出边界  -6: 深度图错误 -7: 红外图太亮了
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_LivenessInfo.Num">
+            <summary>
+            结果集大小
+            </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ASF_LivenessThreshold">
+            <summary>
+            活体置信度
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_LivenessThreshold.Thresholdmodel_BGR">
+            <summary>
+            BGR活体检测阈值设置，默认值0.5
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_LivenessThreshold.Thresholdmodel_IR">
+            <summary>
+            IR活体检测阈值设置，默认值0.7
+            </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ASF_MaskInfo">
+            <summary>
+            口罩信息
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_MaskInfo.MaskArray">
+            <summary>
+            "0" 代表没有带口罩，"1"代表带口罩 ,"-1"表不确定
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_MaskInfo.Num">
+            <summary>
+            结果集大小
+            </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ASF_MultiFaceInfo">
+            <summary>
+            多人脸检测结构体
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_MultiFaceInfo.FaceRects">
+            <summary>
+            人脸Rect结果集
+            <see cref="T:Yj.ArcSoftSDK._4_0.Models.MRECT"/>
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_MultiFaceInfo.FaceOrients">
+            <summary>
+            人脸角度结果集，与faceRects一一对应  对应ASF_OrientCode
+            <see cref="T:Yj.ArcSoftSDK._4_0.Models.ASF_OrientCode"/>
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_MultiFaceInfo.FaceNum">
+            <summary>
+            结果集大小
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_MultiFaceInfo.FaceID">
+            <summary>
+            face ID，IMAGE模式下不返回FaceID
+            <para>int32</para>
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_MultiFaceInfo.WearGlasses">
+            <summary>
+            戴眼镜置信度[0-1],推荐阈值0.5
+            <see cref="T:System.Single"/>
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_MultiFaceInfo.LeftEyeClosed">
+            <summary>
+            左眼状态 0 未闭眼；1 闭眼
+            <see cref="T:System.Int32"/>
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_MultiFaceInfo.RightEyeClosed">
+            <summary>
+            右眼状态 0 未闭眼；1 闭眼
+            <see cref="T:System.Int32"/>
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_MultiFaceInfo.FaceShelter">
+            <summary>
+            "1" 表示 遮挡, "0" 表示 未遮挡, "-1" 表示不确定
+            <see cref="T:System.Int32"/>
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_MultiFaceInfo.FaceDataInfoList">
+            <summary>
+            多张人脸信息
+            <see cref="T:Yj.ArcSoftSDK._4_0.Models.ASF_FaceDataInfo"/>
+            do not free by self !!!
+            </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ASF_OrientCode">
+            <summary>
+            人脸角度结构体
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_OrientCode.ASF_OC_0">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_OrientCode.ASF_OC_90">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_OrientCode.ASF_OC_270">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_OrientCode.ASF_OC_180">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_OrientCode.ASF_OC_30">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_OrientCode.ASF_OC_60">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_OrientCode.ASF_OC_120">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_OrientCode.ASF_OC_150">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_OrientCode.ASF_OC_210">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_OrientCode.ASF_OC_240">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_OrientCode.ASF_OC_300">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_OrientCode.ASF_OC_330">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ASF_OrientPriority">
+            <summary>
+            人脸检测优先角度结构体，推荐ASF_OP_0_HIGHER_EXT
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_OrientPriority.ASF_OP_0_ONLY">
+            <summary>
+            常规预览下正方向
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_OrientPriority.ASF_OP_90_ONLY">
+            <summary>
+            基于0°逆时针旋转90°的方向
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_OrientPriority.ASF_OP_270_ONLY">
+            <summary>
+            基于0°逆时针旋转270°的方向
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_OrientPriority.ASF_OP_180_ONLY">
+            <summary>
+            基于0°旋转180°的方向（逆时针、顺时针效果一样）
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_OrientPriority.ASF_OP_ALL_OUT">
+            <summary>
+            全角度
+            </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ASF_RegisterOrNot">
+            <summary>
+            根据应用场景（注册照还是识别照）选择对应的模型进行人脸特征提取
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_RegisterOrNot.ASF_RECOGNITION">
+            <summary>
+            用于识别照人脸特征提取
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_RegisterOrNot.ASF_REGISTER">
+            <summary>
+            用于注册照人脸特征提取
+            </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ASF_SingleFaceInfo">
+            <summary>
+            单人脸检测结构体
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_SingleFaceInfo.FaceRect">
+            <summary>
+            人脸坐标Rect结果
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_SingleFaceInfo.FaceOrient">
+            <summary>
+            人脸角度
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_SingleFaceInfo.FaceDataInfo">
+            <summary>
+            单张人脸数据
+            </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ASF_VERSION">
+            <summary>
+            SDK版本信息结构体
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_VERSION.Version">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_VERSION.BuildDate">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASF_VERSION.CopyRight">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ASVL_OFFSCREEN">
+            <summary>
+            Define the image format space
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASVL_OFFSCREEN.u32PixelArrayFormat">
+            <summary>
+            0x201 (513)
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASVL_OFFSCREEN.i32Width">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASVL_OFFSCREEN.i32Height">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASVL_OFFSCREEN.ppu8Plane">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.ASVL_OFFSCREEN.pi32Pitch">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.FaceEngineMask">
+            <summary>
+            引擎方法类型结构体，在初始化时将用到的类型用|连接传入，如 ASF_NONE|ASF_FACE_DETECT|ASF_FACERECOGNITION
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.FaceEngineMask.ASF_NONE">
+            <summary>
+            不做方法初始化方法类型
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.FaceEngineMask.ASF_FACE_DETECT">
+            <summary>
+            人脸检测
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.FaceEngineMask.ASF_FACERECOGNITION">
+            <summary>
+            人脸特征
+            <para>人脸识别方法类型常量，包含图片feature提取和feature比对</para>
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.FaceEngineMask.ASF_AGE">
+            <summary>
+            年龄
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.FaceEngineMask.ASF_GENDER">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.FaceEngineMask.ASF_FACE3DANGLE">
+            <summary>
+            3D角度
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.FaceEngineMask.ASF_FACELANDMARK">
+            <summary>
+            额头区域检测
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.FaceEngineMask.ASF_LIVENESS">
+            <summary>
+            RGB活体
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.FaceEngineMask.ASF_IMAGEQUALITY">
+            <summary>
+            图像质量检测
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.FaceEngineMask.ASF_IR_LIVENESS">
+            <summary>
+            红外活体
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.FaceEngineMask.ASF_FACESHELTER">
+            <summary>
+            人脸遮挡
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.FaceEngineMask.ASF_MASKDETECT">
+            <summary>
+            口罩检测
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.FaceEngineMask.ASF_UPDATE_FACEDATA">
+            <summary>
+            人脸信息
+            </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.ImageInfo">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.ImageInfo.ImgData">
+            <summary>
+            图片的像素数据
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.ImageInfo.Width">
+            <summary>
+            图片像素宽
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.ImageInfo.Height">
+            <summary>
+            图片像素高
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.ImageInfo.Format">
+            <summary>
+            图片格式
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.ImageInfo.WidthStep">
+            <summary>
+            步长
+            </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.LPASF_ImageData">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.LPASF_ImageData.u32PixelArrayFormat">
+            <summary>
+            颜色格式
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.LPASF_ImageData.i32Width">
+            <summary>
+            图像宽度
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.LPASF_ImageData.i32Height">
+            <summary>
+            图像高度
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.LPASF_ImageData.ppu8Plane">
+            <summary>
+            图像数据
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.LPASF_ImageData.pi32Pitch">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.MRECT">
+            <summary>
+            人脸框信息结构体
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.MRECT.Left">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.MRECT.Top">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.MRECT.Right">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.MRECT.Bottom">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.Rectangle">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.Rectangle.Empty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.Rectangle.X">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.Rectangle.Y">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.Rectangle.Width">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.Rectangle.Height">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.Rectangle.Left">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.Rectangle.Top">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.Rectangle.Right">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.Rectangle.Bottom">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.Rectangle.IsEmpty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.Rectangle.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <param name="width"></param>
+            <param name="height"></param>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.Rectangle.FromLTRB(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="left"></param>
+            <param name="top"></param>
+            <param name="right"></param>
+            <param name="bottom"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.Rectangle.Equals(System.Object)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.Rectangle.op_Equality(Yj.ArcSoftSDK._4_0.Models.Rectangle,Yj.ArcSoftSDK._4_0.Models.Rectangle)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.Rectangle.op_Inequality(Yj.ArcSoftSDK._4_0.Models.Rectangle,Yj.ArcSoftSDK._4_0.Models.Rectangle)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.Rectangle.GetHashCode">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.Rectangle.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.PointF">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.PointF.Empty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.PointF.IsEmpty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.PointF.X">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.PointF.Y">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.#ctor(System.Single,System.Single)">
+            <summary>
+            
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <exception cref="T:System.NullReferenceException"></exception>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.Equals(Yj.ArcSoftSDK._4_0.Models.PointF)">
+            <summary>
+            
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+            <exception cref="T:System.NullReferenceException"></exception>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.Equals(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.GetHashCode">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.op_Equality(Yj.ArcSoftSDK._4_0.Models.PointF,Yj.ArcSoftSDK._4_0.Models.PointF)">
+            <summary>
+            
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.op_Inequality(Yj.ArcSoftSDK._4_0.Models.PointF,Yj.ArcSoftSDK._4_0.Models.PointF)">
+            <summary>
+            
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Utils.ImageUtil">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Utils.ImageUtil.GetImageData(SkiaSharp.SKBitmap)">
+             <summary>
+            
+             </summary>
+             <param name="inImage"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Utils.ImageUtil.GetImageData_IR(SkiaSharp.SKBitmap)">
+             <summary>
+            
+             </summary>
+             <param name="inImage"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Utils.ImageUtil.ReadBMP(SkiaSharp.SKBitmap)">
+            <summary>
+            获取图片信息
+            </summary>
+            <param name="image">图片</param>
+            <returns>成功或失败</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Utils.ImageUtil.ReadBMP_IR(SkiaSharp.SKBitmap)">
+            <summary>
+            获取图片IR信息
+            </summary>
+            <param name="image">图片</param>
+            <returns>成功或失败</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Utils.ImageUtil.CheckImage(SkiaSharp.SKBitmap)">
+            <summary>
+            宽度4的倍数校验
+            </summary>
+            <param name="image"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Utils.MemoryUtil">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Utils.MemoryUtil.Malloc(System.Int32)">
+            <summary>
+            申请内存
+            </summary>
+            <param name="len">内存长度(单位:字节)</param>
+            <returns>内存首地址</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Utils.MemoryUtil.Free(System.IntPtr)">
+            <summary>
+            释放ptr托管的内存
+            </summary>
+            <param name="ptr">托管指针</param>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Utils.MemoryUtil.Free(System.IntPtr@)">
+            <summary>
+            释放ptr托管的内存
+            </summary>
+            <param name="ptr">托管指针</param>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Utils.MemoryUtil.Copy(System.Byte[],System.Int32,System.IntPtr,System.Int32)">
+            <summary>
+            将字节数组的内容拷贝到托管内存中
+            </summary>
+            <param name="source">元数据</param>
+            <param name="startIndex">元数据拷贝起始位置</param>
+            <param name="destination">托管内存</param>
+            <param name="length">拷贝长度</param>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Utils.MemoryUtil.Copy(System.IntPtr,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            将托管内存的内容拷贝到字节数组中
+            </summary>
+            <param name="source">托管内存</param>
+            <param name="destination">目标字节数组</param>
+            <param name="startIndex">拷贝起始位置</param>
+            <param name="length">拷贝长度</param>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Utils.MemoryUtil.PtrToStructure``1(System.IntPtr)">
+            <summary>
+            将ptr托管的内存转化为结构体对象
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <param name="ptr">托管指针</param>
+            <returns>转化后的对象</returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Utils.MemoryUtil.StructureToPtr``1(``0,System.IntPtr)">
+            <summary>
+            将结构体对象复制到ptr托管的内存
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="t"></param>
+            <param name="ptr"></param>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Utils.MemoryUtil.SizeOf``1">
+            <summary>
+            获取类型的大小
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <returns>类型的大小</returns>
+        </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Utils.Util">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Utils.Util.ToTimestamp(System.DateTime)">
+             <summary>
+            
+             </summary>
+             <param name="dateTime"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Utils.Util.ToDateTime(System.Int64)">
+             <summary>
+            
+             </summary>
+             <param name="timestamp"></param>
+             <returns></returns>
+        </member>
+    </members>
+</doc>

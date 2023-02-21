@@ -12,7 +12,7 @@ namespace Yj.ArcSoftSDK._4_0
         /// <summary>
         /// SDK动态链接库路径
         /// </summary>
-        public const string Dll_PATH = ".\\ArcProLib\\x86\\libarcsoft_face_engine.dll";
+        public const string Dll_PATH = ".\\ArcProLib\\x86_4.0\\libarcsoft_face_engine.dll";
 
         /// <summary>
         /// 激活人脸识别SDK引擎函数
@@ -55,7 +55,7 @@ namespace Yj.ArcSoftSDK._4_0
         /// <param name="detectModel">预留字段 暂时使用 <see cref="ASF_DetectModel.ASF_DETECT_MODEL_RGB"/></param>
         /// <returns>调用结果</returns>
         [DllImport(Dll_PATH, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int ASFImageQualityDetectEx(IntPtr pEngine, IntPtr imgData, IntPtr faceInfo, int isMask,ref float confidenceLevel, int detectModel);
+        public static extern int ASFImageQualityDetectEx(IntPtr pEngine, IntPtr imgData, IntPtr faceInfo, int isMask, ref float confidenceLevel, int detectModel);
 
         /// <summary>
         /// 人脸检测
@@ -152,7 +152,7 @@ namespace Yj.ArcSoftSDK._4_0
         /// <param name="faceFeature1">待比较人脸特征1</param>
         /// <param name="faceFeature2"> 待比较人脸特征2</param>
         /// <param name="similarity">相似度(0.0~1.0)</param>
-        /// <param name="compareModel">选择人脸特征比对模型 <see cref="Models.ASF_CompareModel"/></param>
+        /// <param name="compareModel">选择人脸特征比对模型 <see cref="ASF_CompareModel"/></param>
         /// <returns>调用结果</returns>
         [DllImport(Dll_PATH, CallingConvention = CallingConvention.Cdecl)]
         public static extern int ASFFaceFeatureCompare(IntPtr pEngine, IntPtr faceFeature1, IntPtr faceFeature2, ref float similarity, int compareModel);

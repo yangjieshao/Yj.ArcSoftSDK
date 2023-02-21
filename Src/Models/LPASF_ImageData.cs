@@ -25,13 +25,13 @@ namespace Yj.ArcSoftSDK._4_0.Models
         /// <summary>
         /// 图像数据
         /// </summary>
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4, ArraySubType = System.Runtime.InteropServices.UnmanagedType.SysUInt)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4, ArraySubType = UnmanagedType.SysUInt)]
         public System.IntPtr[] ppu8Plane;
 
         /// <summary>
         ///
         /// </summary>
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4, ArraySubType = System.Runtime.InteropServices.UnmanagedType.I4)]
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4, ArraySubType = UnmanagedType.I4)]
         public int[] pi32Pitch;
     }
 }

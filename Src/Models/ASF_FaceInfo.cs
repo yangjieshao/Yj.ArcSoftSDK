@@ -13,7 +13,7 @@
         /// <summary>
         /// 人脸坐标Rect结果
         /// </summary>
-        public System.Drawing.Rectangle Rectangle { internal set; get; }
+        public Rectangle Rectangle { internal set; get; }
 
         /// <summary>
         /// 头像角度
@@ -37,7 +37,7 @@
 
         /// <summary>
         /// RGB 活体
-        /// 0：非真人；1：真人；-1：不确定；-2:传入人脸数>1；
+        /// 0：非真人；1：真人；-1：不确定；-2:传入人脸数>1；-3: 人脸过小 -4: 角度过大 -5: 人脸超出边界  -6: 深度图错误 -7: 红外图太亮了
         /// </summary>
         public int RgbLive { internal set; get; }
 
@@ -66,7 +66,10 @@
         /// 口罩 "0" 代表没有带口罩，"1"代表带口罩 ,"-1"表不确定
         /// </summary>
         public int Mask { set; get; }
-
+        /// <summary>
+        /// 戴眼镜置信度[0-1],推荐阈值0.5
+        /// </summary>
+        public float WearGlasses { set; get; }
         /// <summary>
         /// 左眼状态
         /// </summary>
@@ -82,7 +85,7 @@
         /// <summary>
         /// 额头坐标 Empty 表示无效
         /// </summary>
-        public System.Drawing.PointF FaceLandPoint { set; get; }
+        public PointF FaceLandPoint { set; get; } = PointF.Empty;
     }
 
     /// <summary>
