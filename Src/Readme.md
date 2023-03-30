@@ -6,15 +6,25 @@
 版本： x86 x64 v4.0<br/>
 
 
-商用授权 离线激活 将激活验证文件更名为 ArcFacePro64.dat 
+
+部署到新设备时 不要复制授权文件
+商用授权 授权文件名字为 : ArcFacePro64.dat  或  ArcFacePro32.dat
+离线激活 可以从官网 开发者中心 -> 帮助中心 -> 下载3.1的激活小助手 -> 生成硬件信息 -> 从开发者中心用硬件信息生成授权文件
+-> 把授权文件黏贴到进程运行目录 -> 重命名授权文件未 ArcFacePro64.dat 或 ArcFacePro32.dat
 
 ArcFace64.dat ArcFace32.dat   是免费授权的授权文件名
 
-Linux
-SDK动态链接库路径 自行复制至 /usr/lib
-cp -Rf /mnt/d/Linux_x64/ArcProLib/Sox64/* /usr/lib
+Linux 部署
+创建软连接到要使用的虹软库文件
 
-````
+例：
+```
+ln /home/app/ArcProLib/Sox64_4.0/libarcsoft_face.so  /usr/lib/libarcsoft_face.so
+ln /home/app/ArcProLib/Sox64_4.0/libarcsoft_face_engine.so  /usr/lib/libarcsoft_face_engine.so
+ln /home/app/ArcProLib/Sox64_4.0/libarcsoft_face.so  /usr/lib64/libarcsoft_face.so
+ln /home/app/ArcProLib/Sox64_4.0/libarcsoft_face_engine.so  /usr/lib64/libarcsoft_face_engine.so
+```
+
 ## 初始化虹软人脸sdk
 ````csharp
 string proActiveKey32 = Ini.ReadIniData("ArcFace", "ProActiveKey32", string.Empty);
