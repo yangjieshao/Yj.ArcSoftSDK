@@ -1,12 +1,12 @@
-﻿#if (NET40)
+﻿#if NETFRAMEWORK
 using System.Drawing;
 using System.IO;
 #else
 using SkiaSharp;
+using System.Runtime.InteropServices;
 #endif
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using Yj.ArcSoftSDK._4_0.Models;
 using Yj.ArcSoftSDK._4_0.Utils;
 
@@ -35,7 +35,7 @@ namespace Yj.ArcSoftSDK._4_0
             int result = -1;
 
             if (
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64
 #else
@@ -77,7 +77,7 @@ namespace Yj.ArcSoftSDK._4_0
                 }
             }
             else
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
             if (
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X86)
@@ -115,7 +115,7 @@ namespace Yj.ArcSoftSDK._4_0
                     }
                 }
             }
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64)
             {
@@ -217,7 +217,7 @@ namespace Yj.ArcSoftSDK._4_0
             //初始化引擎，正常值为0，其他返回值请参考http://ai.arcsoft.com.cn/bbs/forum.php?mod=viewthread&tid=19&_dsign=dbad527e
 
             if (
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64
 #else
@@ -232,7 +232,7 @@ namespace Yj.ArcSoftSDK._4_0
                 }
             }
             else
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
             if (
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X86)
@@ -244,7 +244,7 @@ namespace Yj.ArcSoftSDK._4_0
                     result = ASFFunctions_Pro_x86.ASFSetFaceShelterParam(pEngine, shelterThreshhold);
                 }
             }
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64)
             {
@@ -271,7 +271,7 @@ namespace Yj.ArcSoftSDK._4_0
         {
             int result = -1;
             if (
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64
 #else
@@ -282,7 +282,7 @@ namespace Yj.ArcSoftSDK._4_0
                 result = ASFFunctions_Pro_x64.ASFUninitEngine(pEngine);
             }
             else
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
             if (
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X86)
@@ -290,7 +290,7 @@ namespace Yj.ArcSoftSDK._4_0
             {
                 result = ASFFunctions_Pro_x86.ASFUninitEngine(pEngine);
             }
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64)
             {
@@ -323,7 +323,7 @@ namespace Yj.ArcSoftSDK._4_0
             bool needCheckImage = true, bool needFaceInfo = false, bool needRgbLive = false,
             bool needIrLive = false, bool needFeatures = false, bool needImageQuality = false, bool isRegister = true)
         {
-#if (NET40)
+#if NETFRAMEWORK
             Image needImage = null;
             using (MemoryStream ms = new MemoryStream(imageBuffer))
             {
@@ -493,7 +493,7 @@ namespace Yj.ArcSoftSDK._4_0
             ASF_CompareModel compareModel = isIdcardCompare ? ASF_CompareModel.ASF_ID_PHOTO : ASF_CompareModel.ASF_LIFE_PHOTO;
 
             if (
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64
 #else
@@ -504,7 +504,7 @@ namespace Yj.ArcSoftSDK._4_0
                 retCode = ASFFunctions_Pro_x64.ASFFaceFeatureCompare(pEngine, pFaceFeature1, pFaceFeature2, ref result, (int)compareModel);
             }
             else
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
             if (
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X86)
@@ -512,7 +512,7 @@ namespace Yj.ArcSoftSDK._4_0
             {
                 retCode = ASFFunctions_Pro_x86.ASFFaceFeatureCompare(pEngine, pFaceFeature1, pFaceFeature2, ref result, (int)compareModel);
             }
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64)
             {
@@ -530,6 +530,42 @@ namespace Yj.ArcSoftSDK._4_0
                 result = -1;
             }
             return result;
+        }
+
+        /// <summary>
+        /// 释放特征值指针
+        /// create by <see cref="Feature2IntPtr(byte[])"/>
+        /// </summary>
+        /// <param name="featureIntPtr"></param>
+        public static void FreeFeatureIntPtr(IntPtr featureIntPtr)
+        {
+            var faceFeature = MemoryUtil.PtrToStructure<ASF_FaceFeature>(featureIntPtr);
+            MemoryUtil.Free(ref faceFeature.Feature);
+            MemoryUtil.Free(ref featureIntPtr);
+        }
+
+        /// <summary>
+        /// 获取特征值指针
+        /// free by <see cref="FreeFeatureIntPtr(IntPtr)"/>
+        /// </summary>
+        /// <param name="feature"></param>
+        /// <returns></returns>
+        public static IntPtr Feature2IntPtr(byte[] feature)
+        {
+            IntPtr pFaceFeature = IntPtr.Zero;
+            if (feature != null
+                && feature.Length > 0)
+            {
+                ASF_FaceFeature faceFeature = new ASF_FaceFeature
+                {
+                    Feature = MemoryUtil.Malloc(feature.Length)
+                };
+                MemoryUtil.Copy(feature, 0, faceFeature.Feature, feature.Length);
+                faceFeature.FeatureSize = feature.Length;
+                pFaceFeature = MemoryUtil.Malloc(MemoryUtil.SizeOf<ASF_FaceFeature>());
+                MemoryUtil.StructureToPtr(faceFeature, pFaceFeature);
+            }
+            return pFaceFeature;
         }
     }
 }

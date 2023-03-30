@@ -150,7 +150,7 @@ namespace Yj.ArcSoftSDK._4_0
         /// <param name="faceFeature1">待比较人脸特征1</param>
         /// <param name="faceFeature2"> 待比较人脸特征2</param>
         /// <param name="similarity">相似度(0.0~1.0)</param>
-        /// <param name="compareModel">选择人脸特征比对模型 <see cref="ASF_CompareModel"/></param>
+        /// <param name="compareModel">选择人脸特征比对模型 <see cref="Models.ASF_CompareModel"/></param>
         /// <returns>调用结果</returns>
         [DllImport(Dll_PATH, CallingConvention = CallingConvention.Cdecl)]
         public static extern int ASFFaceFeatureCompare(IntPtr pEngine, IntPtr faceFeature1, IntPtr faceFeature2, ref float similarity, int compareModel);

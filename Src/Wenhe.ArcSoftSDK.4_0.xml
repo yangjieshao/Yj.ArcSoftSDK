@@ -110,12 +110,14 @@
         <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.FreeFeatureIntPtr(System.IntPtr)">
             <summary>
             释放特征值指针
+            create by <see cref="M:Yj.ArcSoftSDK._4_0.ASFFunctions.Feature2IntPtr(System.Byte[])"/>
             </summary>
             <param name="featureIntPtr"></param>
         </member>
         <member name="M:Yj.ArcSoftSDK._4_0.ASFFunctions.Feature2IntPtr(System.Byte[])">
             <summary>
             获取特征值指针
+            free by <see cref="M:Yj.ArcSoftSDK._4_0.ASFFunctions.FreeFeatureIntPtr(System.IntPtr)"/>
             </summary>
             <param name="feature"></param>
             <returns></returns>
@@ -2030,6 +2032,65 @@
             
              </summary>
         </member>
+        <member name="T:Yj.ArcSoftSDK._4_0.Models.PointF">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:Yj.ArcSoftSDK._4_0.Models.PointF.Empty">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.PointF.IsEmpty">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.PointF.X">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Yj.ArcSoftSDK._4_0.Models.PointF.Y">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.#ctor(System.Single,System.Single)">
+            <summary>
+            
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <exception cref="T:System.NullReferenceException"></exception>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.Equals(Yj.ArcSoftSDK._4_0.Models.PointF)">
+            <summary>
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.Equals(System.Object)">
+            <summary>
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.GetHashCode">
+            <summary>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.op_Equality(Yj.ArcSoftSDK._4_0.Models.PointF,Yj.ArcSoftSDK._4_0.Models.PointF)">
+            <summary>
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.op_Inequality(Yj.ArcSoftSDK._4_0.Models.PointF,Yj.ArcSoftSDK._4_0.Models.PointF)">
+            <summary>
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
         <member name="T:Yj.ArcSoftSDK._4_0.Models.Rectangle">
             <summary>
             
@@ -2104,12 +2165,6 @@
             <param name="bottom"></param>
             <returns></returns>
         </member>
-        <member name="M:Yj.ArcSoftSDK._4_0.Models.Rectangle.Equals(System.Object)">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:Yj.ArcSoftSDK._4_0.Models.Rectangle.op_Equality(Yj.ArcSoftSDK._4_0.Models.Rectangle,Yj.ArcSoftSDK._4_0.Models.Rectangle)">
             <summary>
             
@@ -2134,87 +2189,26 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Yj.ArcSoftSDK._4_0.Models.PointF">
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.Rectangle.Equals(System.Object)">
             <summary>
-            
             </summary>
+            <returns></returns>
         </member>
-        <member name="F:Yj.ArcSoftSDK._4_0.Models.PointF.Empty">
+        <member name="M:Yj.ArcSoftSDK._4_0.Models.Rectangle.Equals(Yj.ArcSoftSDK._4_0.Models.Rectangle)">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Yj.ArcSoftSDK._4_0.Models.PointF.IsEmpty">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Yj.ArcSoftSDK._4_0.Models.PointF.X">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Yj.ArcSoftSDK._4_0.Models.PointF.Y">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.#ctor(System.Single,System.Single)">
-            <summary>
-            
-            </summary>
-            <param name="x"></param>
-            <param name="y"></param>
-            <exception cref="T:System.NullReferenceException"></exception>
-        </member>
-        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.Equals(Yj.ArcSoftSDK._4_0.Models.PointF)">
-            <summary>
-            
             </summary>
             <param name="other"></param>
             <returns></returns>
-            <exception cref="T:System.NullReferenceException"></exception>
-        </member>
-        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.Equals(System.Object)">
-            <summary>
-            
-            </summary>
-            <param name="obj"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.GetHashCode">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.op_Equality(Yj.ArcSoftSDK._4_0.Models.PointF,Yj.ArcSoftSDK._4_0.Models.PointF)">
-            <summary>
-            
-            </summary>
-            <param name="left"></param>
-            <param name="right"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Yj.ArcSoftSDK._4_0.Models.PointF.op_Inequality(Yj.ArcSoftSDK._4_0.Models.PointF,Yj.ArcSoftSDK._4_0.Models.PointF)">
-            <summary>
-            
-            </summary>
-            <param name="left"></param>
-            <param name="right"></param>
-            <returns></returns>
         </member>
         <member name="T:Yj.ArcSoftSDK._4_0.Utils.ImageUtil">
-             <summary>
-            
-             </summary>
+            <summary>
+            </summary>
         </member>
         <member name="M:Yj.ArcSoftSDK._4_0.Utils.ImageUtil.GetImageData(SkiaSharp.SKBitmap)">
-             <summary>
-            
-             </summary>
-             <param name="inImage"></param>
-             <returns></returns>
+            <summary>
+            </summary>
+            <param name="inImage"></param>
+            <returns></returns>
         </member>
         <member name="M:Yj.ArcSoftSDK._4_0.Utils.ImageUtil.GetImageData_IR(SkiaSharp.SKBitmap)">
              <summary>

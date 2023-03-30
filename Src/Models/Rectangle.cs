@@ -5,7 +5,7 @@ namespace Yj.ArcSoftSDK._4_0.Models
     /// <summary>
     /// 
     /// </summary>
-    public struct Rectangle
+    public struct Rectangle : IEquatable<Rectangle>
     {
         /// <summary>
         /// 
@@ -51,6 +51,7 @@ namespace Yj.ArcSoftSDK._4_0.Models
         /// 
         /// </summary>
         public int Bottom => Y + Height;
+
         /// <summary>
         /// 
         /// </summary>
@@ -58,14 +59,13 @@ namespace Yj.ArcSoftSDK._4_0.Models
         {
             get
             {
-                if (Height == 0 && Width == 0 && X == 0)
-                {
-                    return Y == 0;
-                }
-
-                return false;
+                return Height == 0
+                    && Width == 0
+                    && X == 0
+                    && Y == 0;
             }
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -75,10 +75,10 @@ namespace Yj.ArcSoftSDK._4_0.Models
         /// <param name="height"></param>
         public Rectangle(int x, int y, int width, int height)
         {
-            X = x;
-            Y = y;
-            Width = width;
-            Height = height;
+            this.X = x;
+            this.Y = y;
+            this.Width = width;
+            this.Height = height;
         }
 
         /// <summary>
@@ -92,26 +92,6 @@ namespace Yj.ArcSoftSDK._4_0.Models
         public static Rectangle FromLTRB(int left, int top, int right, int bottom)
         {
             return new Rectangle(left, top, right - left, bottom - top);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public override bool Equals(object obj)
-        {
-            if (!(obj is Rectangle))
-            {
-                return false;
-            }
-
-            Rectangle rectangle = (Rectangle)obj;
-            if (rectangle.X == X && rectangle.Y == Y && rectangle.Width == Width)
-            {
-                return rectangle.Height == Height;
-            }
-
-            return false;
         }
 
         /// <summary>
@@ -143,7 +123,7 @@ namespace Yj.ArcSoftSDK._4_0.Models
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return X ^ (Y << 13 | (int)((uint)Y >> 19)) ^ (Width << 26 | (int)((uint)Width >> 6)) ^ (Height << 7 | (int)((uint)Height >> 25));
+            return X ^ ((Y << 13) | (int)((uint)Y >> 19)) ^ ((Width << 26) | (int)((uint)Width >> 6)) ^ ((Height << 7) | (int)((uint)Height >> 25));
         }
 
         /// <summary>
@@ -154,106 +134,30 @@ namespace Yj.ArcSoftSDK._4_0.Models
         {
             return "{X=" + X + ",Y=" + Y + ",Width=" + Width + ",Height=" + Height + "}";
         }
-    }
-    /// <summary>
-    /// 
-    /// </summary>
-    public struct PointF : IEquatable<PointF>
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        public static readonly PointF Empty;
 
         /// <summary>
-        /// 
         /// </summary>
-        public bool IsEmpty
-        {
-            get
-            {
-                return Math.Abs(X - 0.0d) < double.Epsilon
-                    && Math.Abs(Y - 0.0d) < double.Epsilon;
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public float X { set; get; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public float Y { set; get; }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <exception cref="NullReferenceException"></exception>
-        public PointF(float x, float y)
-        {
-            X = x;
-            Y = y;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="other"></param>
-        /// <returns></returns>
-        /// <exception cref="NullReferenceException"></exception>
-        public bool Equals(PointF other)
-        {
-            throw null;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="obj"></param>
         /// <returns></returns>
         public override bool Equals(object obj)
         {
-            if (!(obj is PointF))
+            if (!(obj is Rectangle))
             {
                 return false;
             }
 
-            PointF pointF = (PointF)obj;
-            return Math.Abs(pointF.X - X) < double.Epsilon
-                && Math.Abs(pointF.Y - Y) < double.Epsilon;
+            return Equals((Rectangle)obj);
         }
 
         /// <summary>
-        /// 
         /// </summary>
+        /// <param name="other"></param>
         /// <returns></returns>
-        public override int GetHashCode()
+        public bool Equals(Rectangle other)
         {
-            int hashCode = 8845;
-            hashCode = hashCode * -8799 + X.GetHashCode();
-            hashCode = hashCode * -8799 + Y.GetHashCode();
-            return hashCode;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static bool operator ==(PointF left, PointF right)
-        {
-            return left.Equals(right);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static bool operator !=(PointF left, PointF right)
-        {
-            return !left.Equals(right);
+            return other.X == X
+                && other.Y == Y
+                && other.Width == Width
+                && other.Height == Height;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿#if !(NET40)
+﻿#if !(NETFRAMEWORK)
 using SkiaSharp;
 using System;
 using Yj.ArcSoftSDK._4_0.Models;
@@ -6,12 +6,10 @@ using Yj.ArcSoftSDK._4_0.Models;
 namespace Yj.ArcSoftSDK._4_0.Utils
 {
     /// <summary>
-    ///
     /// </summary>
     public static class ImageUtil
     {
         /// <summary>
-        ///
         /// </summary>
         /// <param name="inImage"></param>
         /// <returns></returns>
@@ -154,7 +152,7 @@ namespace Yj.ArcSoftSDK._4_0.Utils
                 if (result.Width % 4 != 0
                     || result.Height % 4 != 0)
                 {
-                    var newImage = image.Resize(new SKImageInfo(result.Width - (result.Width % 4), result.Height - (result.Height % 4)), SKFilterQuality.High);
+                    var newImage = result.Resize(new SKImageInfo(result.Width - (result.Width % 4), result.Height - (result.Height % 4)), SKFilterQuality.High);
                     result.Dispose();
                     result = newImage;
                 }

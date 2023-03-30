@@ -1,5 +1,6 @@
-﻿#if (NET40)
+﻿#if NETFRAMEWORK
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -293,7 +294,7 @@ namespace Yj.ArcSoftSDK._4_0.Utils
         /// <param name="dstWidth">目标图片宽</param>
         /// <param name="dstHeight">目标图片高</param>
         /// <returns></returns>
-        internal static Bitmap ScaleImage(Image image, int dstWidth, int dstHeight)
+        private static Bitmap ScaleImage(Image image, int dstWidth, int dstHeight)
         {
             try
             {
@@ -338,7 +339,7 @@ namespace Yj.ArcSoftSDK._4_0.Utils
         /// <param name="newWidth">目标图片宽</param>
         /// <param name="newHeight">目标图片高</param>
         /// <returns></returns>
-        internal static float GetWidthAndHeight(int oldWidth, int oldHeigt, int newWidth, int newHeight)
+        private static float GetWidthAndHeight(int oldWidth, int oldHeigt, int newWidth, int newHeight)
         {
             //按比例缩放
             float scaleRate;
@@ -390,7 +391,44 @@ namespace Yj.ArcSoftSDK._4_0.Utils
             if (image != null)
             {
                 result = (Image)image.Clone();
-                
+
+                {
+                    Bitmap newImage = new Bitmap(image.Width, image.Height);
+                    newImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+                    Graphics g = Graphics.FromImage(newImage);
+                    g.DrawImageUnscaled(image, 0, 0);
+                    g.Dispose();
+                    result.Dispose();
+                    result = newImage;
+                }
+
+                // 去除照片元数据 包括照片旋转 / 放大 以及错误的dpi
+                if (result.PropertyItems != null
+                && result.PropertyItems.Length > 0)
+                {
+                    CheckImageDirection(ref result);
+
+                    List<int> propids = new List<int>();
+
+                    foreach (var p in result.PropertyItems)
+                    {
+                        propids.Add(p.Id);
+                    }
+                    foreach (var propid in propids)
+                    {
+                        result.RemovePropertyItem(propid);
+                    }
+                }
+
+                // 修正dpi
+                if (result.HorizontalResolution != 96f
+                    || result.VerticalResolution != 96f)
+                {
+                    Bitmap newImage = ResetDpi(result, 96f, 96f, true);
+                    result.Dispose();
+                    result = newImage;
+                }
+
                 if (result.Width % 4 != 0
                     || result.Height % 4 != 0)
                 {
@@ -401,6 +439,74 @@ namespace Yj.ArcSoftSDK._4_0.Utils
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// 矫正照片方向
+        /// </summary>
+        private static void CheckImageDirection(ref Image image)
+        {
+            if (image == null || image.PropertyIdList == null || image.PropertyIdList.Length == 0)
+            {
+                return;
+            }
+
+            PropertyItem[] propertyItems = image.PropertyItems;
+            foreach (PropertyItem propertyItem in propertyItems)
+            {
+                if (propertyItem.Id == 274)
+                {
+                    RotateFlipType rotateFlipType;
+                    switch (propertyItem.Value[0])
+                    {
+                        case 6:
+                            rotateFlipType = RotateFlipType.Rotate90FlipNone;
+                            break;
+
+                        case 3:
+                            rotateFlipType = RotateFlipType.Rotate180FlipNone;
+                            break;
+
+                        case 8:
+                            rotateFlipType = RotateFlipType.Rotate270FlipNone;
+                            break;
+
+                        default:
+                            rotateFlipType = RotateFlipType.RotateNoneFlipNone;
+                            break;
+                    }
+                    propertyItem.Value[0] = 0;  //旋转属性值设置为不旋转
+                    image.SetPropertyItem(propertyItem); //回拷进图片流
+                    image.RotateFlip(rotateFlipType);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 重设图片DPI
+        /// </summary>
+        /// <returns></returns>
+        private static Bitmap ResetDpi(Image image, float xDpi = 96f, float yDpi = 96f, bool useOldSize = true)
+        {
+            if (image.HorizontalResolution != xDpi || image.VerticalResolution != yDpi)
+            {
+                Bitmap bitmap = ((!useOldSize) ? new Bitmap((int)((float)image.Width * xDpi / image.HorizontalResolution)
+                                                          , (int)((float)image.Height * yDpi / image.VerticalResolution), image.PixelFormat)
+                                               : new Bitmap(image.Width, image.Height, image.PixelFormat));
+                bitmap.SetResolution(xDpi, yDpi);
+                using (Graphics graphics = Graphics.FromImage(bitmap))
+                {
+                    graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    graphics.SmoothingMode = SmoothingMode.HighQuality;
+                    graphics.CompositingQuality = CompositingQuality.HighQuality;
+                    graphics.Clear(Color.Transparent);
+                    graphics.DrawImage(image, new System.Drawing.Rectangle(0, 0, bitmap.Width, bitmap.Height), new System.Drawing.Rectangle(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
+                }
+
+                return bitmap;
+            }
+
+            return new Bitmap(image);
         }
     }
 }

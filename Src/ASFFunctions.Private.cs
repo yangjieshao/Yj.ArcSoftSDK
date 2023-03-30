@@ -1,5 +1,5 @@
 ﻿using System;
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
 using System.Runtime.InteropServices;
 #endif
 using Yj.ArcSoftSDK._4_0.Models;
@@ -9,40 +9,6 @@ namespace Yj.ArcSoftSDK._4_0
 {
     public static partial class ASFFunctions
     {
-        /// <summary>
-        /// 释放特征值指针
-        /// </summary>
-        /// <param name="featureIntPtr"></param>
-        public static void FreeFeatureIntPtr(IntPtr featureIntPtr)
-        {
-            var faceFeature = MemoryUtil.PtrToStructure<ASF_FaceFeature>(featureIntPtr);
-            MemoryUtil.Free(ref faceFeature.Feature);
-            MemoryUtil.Free(ref featureIntPtr);
-        }
-
-        /// <summary>
-        /// 获取特征值指针
-        /// </summary>
-        /// <param name="feature"></param>
-        /// <returns></returns>
-        public static IntPtr Feature2IntPtr(byte[] feature)
-        {
-            IntPtr pFaceFeature = IntPtr.Zero;
-            if (feature != null
-                && feature.Length > 0)
-            {
-                ASF_FaceFeature faceFeature = new ASF_FaceFeature
-                {
-                    Feature = MemoryUtil.Malloc(feature.Length)
-                };
-                MemoryUtil.Copy(feature, 0, faceFeature.Feature, feature.Length);
-                faceFeature.FeatureSize = feature.Length;
-                pFaceFeature = MemoryUtil.Malloc(MemoryUtil.SizeOf<ASF_FaceFeature>());
-                MemoryUtil.StructureToPtr(faceFeature, pFaceFeature);
-            }
-            return pFaceFeature;
-        }
-
         /// <summary>
         /// 年龄检测
         /// </summary>
@@ -54,7 +20,7 @@ namespace Yj.ArcSoftSDK._4_0
             int retCode = -1;
 
             if (
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64
 #else
@@ -65,7 +31,7 @@ namespace Yj.ArcSoftSDK._4_0
                 retCode = ASFFunctions_Pro_x64.ASFGetAge(pEngine, pInfo);
             }
             else
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
             if (
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X86)
@@ -73,7 +39,7 @@ namespace Yj.ArcSoftSDK._4_0
             {
                 retCode = ASFFunctions_Pro_x86.ASFGetAge(pEngine, pInfo);
             }
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64)
             {
@@ -103,7 +69,7 @@ namespace Yj.ArcSoftSDK._4_0
             IntPtr pInfo = MemoryUtil.Malloc(MemoryUtil.SizeOf<ASF_GenderInfo>());
             int retCode = -1;
             if (
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64
 #else
@@ -114,7 +80,7 @@ namespace Yj.ArcSoftSDK._4_0
                 retCode = ASFFunctions_Pro_x64.ASFGetGender(pEngine, pInfo);
             }
             else
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
             if (
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X86)
@@ -122,7 +88,7 @@ namespace Yj.ArcSoftSDK._4_0
             {
                 retCode = ASFFunctions_Pro_x86.ASFGetGender(pEngine, pInfo);
             }
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64)
             {
@@ -152,7 +118,7 @@ namespace Yj.ArcSoftSDK._4_0
             IntPtr pInfo = MemoryUtil.Malloc(MemoryUtil.SizeOf<ASF_Face3DAngle>());
             int retCode = -1;
             if (
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64
 #else
@@ -163,7 +129,7 @@ namespace Yj.ArcSoftSDK._4_0
                 retCode = ASFFunctions_Pro_x64.ASFGetFace3DAngle(pEngine, pInfo);
             }
             else
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
             if (
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X86)
@@ -171,7 +137,7 @@ namespace Yj.ArcSoftSDK._4_0
             {
                 retCode = ASFFunctions_Pro_x86.ASFGetFace3DAngle(pEngine, pInfo);
             }
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64)
             {
@@ -201,7 +167,7 @@ namespace Yj.ArcSoftSDK._4_0
             IntPtr pInfo = MemoryUtil.Malloc(MemoryUtil.SizeOf<ASF_LivenessInfo>());
             int retCode = -1;
             if (
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64
 #else
@@ -212,7 +178,7 @@ namespace Yj.ArcSoftSDK._4_0
                 retCode = ASFFunctions_Pro_x64.ASFGetLivenessScore(pEngine, pInfo);
             }
             else
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
             if (
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X86)
@@ -220,7 +186,7 @@ namespace Yj.ArcSoftSDK._4_0
             {
                 retCode = ASFFunctions_Pro_x86.ASFGetLivenessScore(pEngine, pInfo);
             }
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64)
             {
@@ -250,7 +216,7 @@ namespace Yj.ArcSoftSDK._4_0
             IntPtr pInfo = MemoryUtil.Malloc(MemoryUtil.SizeOf<ASF_MaskInfo>());
             int retCode = -1;
             if (
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64
 #else
@@ -261,7 +227,7 @@ namespace Yj.ArcSoftSDK._4_0
                 retCode = ASFFunctions_Pro_x64.ASFGetMask(pEngine, pInfo);
             }
             else
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
             if (
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X86)
@@ -269,7 +235,7 @@ namespace Yj.ArcSoftSDK._4_0
             {
                 retCode = ASFFunctions_Pro_x86.ASFGetMask(pEngine, pInfo);
             }
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64)
             {
@@ -300,7 +266,7 @@ namespace Yj.ArcSoftSDK._4_0
             int retCode = -1;
 
             if (
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64
 #else
@@ -311,7 +277,7 @@ namespace Yj.ArcSoftSDK._4_0
                 retCode = ASFFunctions_Pro_x64.ASFGetFaceLandMark(pEngine, pInfo);
             }
             else
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
             if (
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X86)
@@ -319,7 +285,7 @@ namespace Yj.ArcSoftSDK._4_0
             {
                 retCode = ASFFunctions_Pro_x86.ASFGetFaceLandMark(pEngine, pInfo);
             }
-#if NET5_0_OR_GREATER
+#if !(NETFRAMEWORK)
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
                 && RuntimeInformation.ProcessArchitecture == Architecture.X64)
             {
