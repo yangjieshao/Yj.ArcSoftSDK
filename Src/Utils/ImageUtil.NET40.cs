@@ -500,7 +500,8 @@ namespace Yj.ArcSoftSDK._4_0.Utils
                     graphics.SmoothingMode = SmoothingMode.HighQuality;
                     graphics.CompositingQuality = CompositingQuality.HighQuality;
                     graphics.Clear(Color.Transparent);
-                    graphics.DrawImage(image, new System.Drawing.Rectangle(0, 0, bitmap.Width, bitmap.Height), new System.Drawing.Rectangle(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
+                    graphics.DrawImage(image, new System.Drawing.Rectangle(0, 0, bitmap.Width, bitmap.Height)
+                        , new System.Drawing.Rectangle(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
                 }
 
                 return bitmap;
