@@ -8,7 +8,7 @@
 
 
 部署到新设备时 不要复制授权文件
-商用授权 授权文件名字为 : ArcFacePro64.dat  或  ArcFacePro32.dat
+商用授权 授权文件名字为 : ArcFacePro64.dat  或  ArcFacePro32.dat <br/>
 离线激活 可以从官网 开发者中心 -> 帮助中心 -> 下载3.1的激活小助手 -> 生成硬件信息 -> 从开发者中心用硬件信息生成授权文件
 -> 把授权文件黏贴到进程运行目录 -> 重命名授权文件为 ArcFacePro64.dat 或 ArcFacePro32.dat
 
