@@ -76,7 +76,11 @@ if (engine != IntPtr.Zero)
 var similarity = ASFFunctions.FaceFeatureCompare(_DetectFacesEngine, feature1, feature2, ASFFunctions.IsPro && isIdcardCompare);
 var similarity = ASFFunctions.FaceFeatureCompare(_DetectFacesEngine, featureIntptr1, featureIntptr2, ASFFunctions.IsPro && isIdcardCompare);
 ````
-## 特征值转指针对比
+## 特征值转指针用于对比
 ````csharp 
 var featureIntptr=ASFFunctions.Feature2IntPtr(feature)
+````
+## 释放特征值转指针
+````csharp 
+var featureIntptr=ASFFunctions.FreeFeatureIntPtr(featureIntptr)
 ````
