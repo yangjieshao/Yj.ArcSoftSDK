@@ -1,5 +1,5 @@
 ﻿# 硬件要求
-最低配置：Intel® CoreTM i5-2300@2.80GHz 或者同级别芯片<br/>
+最低配置：Intel® CoreTM i5-2300@2.80GHz 或者同级别芯片 实测 J1900 也勉强能用<br/>
 推荐配置：Intel® CoreTM i7-4600U@2.1GHz 或者同级别芯片<br/>
 
 版本： So64  v4.0<br/>
