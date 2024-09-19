@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <!-- 检测生成平台 -->
+    <PropertyGroup>
+        <!-- 优先检测发布平台 -->
+        <PublishPlatform Condition=" '$(PublishPlatform)' == '' And '$(RuntimeIdentifier)'=='win-x86' ">win-x86</PublishPlatform>
+        <PublishPlatform Condition=" '$(PublishPlatform)' == '' And '$(RuntimeIdentifier)'=='win-x64' ">win-x64</PublishPlatform>
+        <PublishPlatform Condition=" '$(PublishPlatform)' == '' And '$(RuntimeIdentifier)'=='linux-x64' ">linux-x64</PublishPlatform>
+        <!-- 编译环境 -->
+        <PublishPlatform Condition=" '$(PublishPlatform)' == '' And '$(OS)' == 'Windows_NT' And '$(Platform)' == 'x86'">win-x86</PublishPlatform>
+        <PublishPlatform Condition=" '$(PublishPlatform)' == '' And '$(OS)' == 'Windows_NT' And '$(PlatformTarget)' == 'x86'">win-x86</PublishPlatform>
+        <PublishPlatform Condition=" '$(PublishPlatform)' == '' And '$(OS)' == 'Windows_NT' And '$(Prefer32Bit)' == 'true'">win-x86</PublishPlatform>
+        <!-- 默认使用win64 -->
+        <PublishPlatform Condition=" '$(PublishPlatform)' == '' And '$(OS)' == 'Windows_NT' ">win-x64</PublishPlatform>
+    </PropertyGroup>
+
+    <!-- 打印信息 -->
+    <Target Name="DebugMsg" BeforeTargets="AfterBuild">
+        <Message Importance="high" Text="Configuration = $(Configuration)" />
+        <Message Importance="high" Text="TargetDir = $(TargetDir)" />
+        <Message Importance="high" Text="ProjectDir = $(ProjectDir)" />
+        <Message Importance="high" Text="PublishDir = $(PublishDir)" />
+        <Message Importance="high" Text="OS = $(OS)" />
+        <Message Importance="high" Text="Platform = $(Platform)" />
+        <Message Importance="high" Text="PlatformTarget = $(PlatformTarget)" />
+        <Message Importance="high" Text="Prefer32Bit = $(Prefer32Bit)" />
+        <Message Importance="high" Text="RuntimeIdentifier = $(RuntimeIdentifier)" />
+        <Message Importance="high" Text="PublishPlatform = $(PublishPlatform)" />
+    </Target>
+
+    <!-- 编译环境复制SDK文件 -->
+
+    <ItemGroup Condition=" '$(PlatformName)' == 'AnyCPU' And '$(OS)' == 'Windows_NT' AND '$(RuntimeIdentifier)' == ''">
+        <None Include="$(MSBuildThisFileDirectory)..\runtimes\win-x64_3.0\**" Link="ArcLib\3.0\%(RecursiveDir)%(Filename)%(Extension)">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Include="$(MSBuildThisFileDirectory)..\runtimes\win-x64_3.1\**" Link="ArcLib\3.1\%(RecursiveDir)%(Filename)%(Extension)">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+    <ItemGroup Condition=" '$(PlatformName)' == 'x86' And '$(OS)' == 'Windows_NT' AND '$(RuntimeIdentifier)' == ''">
+        <None Include="$(MSBuildThisFileDirectory)..\runtimes\win-x86_3.0\**" Link="ArcLib\3.0\%(RecursiveDir)%(Filename)%(Extension)">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Include="$(MSBuildThisFileDirectory)..\runtimes\win-x86_3.1\**" Link="ArcLib\3.1\%(RecursiveDir)%(Filename)%(Extension)">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+    <ItemGroup Condition=" '$(PlatformName)' == 'x64' And '$(OS)' == 'Windows_NT' AND '$(RuntimeIdentifier)' == ''">
+        <None Include="$(MSBuildThisFileDirectory)..\runtimes\win-x64_3.0\**" Link="ArcLib\3.0\%(RecursiveDir)%(Filename)%(Extension)">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Include="$(MSBuildThisFileDirectory)..\runtimes\win-x64_3.1\**" Link="ArcLib\3.1\%(RecursiveDir)%(Filename)%(Extension)">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+    <ItemGroup Condition=" '$(PlatformName)' == 'x64' And '$(OS)' == 'Linux' AND '$(RuntimeIdentifier)' == ''">
+        <None Include="$(MSBuildThisFileDirectory)..\runtimes\linux-x64_3.0\**" Link="ArcLib\3.0\%(RecursiveDir)%(Filename)%(Extension)">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Include="$(MSBuildThisFileDirectory)..\runtimes\linux-x64_3.1\**" Link="ArcLib\3.1\%(RecursiveDir)%(Filename)%(Extension)">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(PublishPlatform)' == 'win-x86' AND '$(RuntimeIdentifier)' == ''">
+        <None Include="$(MSBuildThisFileDirectory)..\runtimes\win-x86_3.0\**">
+            <Link>ArcLib\3.0\%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Include="$(MSBuildThisFileDirectory)..\runtimes\win-x86_3.1\**">
+            <Link>ArcLib\3.1\%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(PublishPlatform)' == 'win-x64' AND '$(RuntimeIdentifier)' == ''">
+        <None Include="$(MSBuildThisFileDirectory)..\runtimes\win-x64_3.0\**">
+            <Link>ArcLib\3.0\%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Include="$(MSBuildThisFileDirectory)..\runtimes\win-x64_3.1\**">
+            <Link>ArcLib\3.1\%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(PublishPlatform)' == 'linux-x64' AND '$(RuntimeIdentifier)' == ''">
+        <None Include="$(MSBuildThisFileDirectory)..\runtimes\linux-x64_3.0\**">
+            <Link>ArcLib\3.0\%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Include="$(MSBuildThisFileDirectory)..\runtimes\linux-x64_3.1\**">
+            <Link>ArcLib\3.1\%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <!-- 发布环境复制SDK文件 -->
+
+    <ItemGroup Condition="'$(RuntimeIdentifier)' == 'win-x86'">
+        <None Include="$(MSBuildThisFileDirectory)..\runtimes\win-x86_3.0\**">
+            <Link>ArcLib\3.0\%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Include="$(MSBuildThisFileDirectory)..\runtimes\win-x86_3.1\**">
+            <Link>ArcLib\3.1\%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+    <ItemGroup Condition="'$(RuntimeIdentifier)' == 'win-x64'">
+        <None Include="$(MSBuildThisFileDirectory)..\runtimes\win-x64_3.0\**">
+            <Link>ArcLib\3.0\%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Include="$(MSBuildThisFileDirectory)..\runtimes\win-x64_3.1\**">
+            <Link>ArcLib\3.1\%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+    <ItemGroup Condition="'$(RuntimeIdentifier)' == 'linux-x64'">
+        <None Include="$(MSBuildThisFileDirectory)..\runtimes\linux-x64_3.0\**">
+            <Link>ArcLib\3.0\%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Include="$(MSBuildThisFileDirectory)..\runtimes\linux-x64_3.1\**">
+            <Link>ArcLib\3.1\%(RecursiveDir)%(Filename)%(Extension)</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <!-- 清理SDK 只清理调试目录，发布目录不清理 -->
+    <Target Name="CleanSDK" BeforeTargets="AfterClean">
+        <Delete Files="$(TargetDir)\ArcLib\3.0\**"></Delete>
+        <Delete Files="$(TargetDir)\ArcLib\3.1\**"></Delete>
+    </Target>
+
+</Project>

@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFrameworks>NET8.0;NET6.0;NET462</TargetFrameworks>
+        <Platforms>AnyCPU;x64;x86</Platforms>
+	</PropertyGroup>
+	<PropertyGroup>
+        <NoWarn>1701;1702;NU1803</NoWarn>
+	</PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\..\pics\**">
+            <Link>pics\%(Filename)%(Extension)</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Yj.ArcSoftSDK.4_0\Yj.ArcSoftSDK.4_0.csproj" />
+    </ItemGroup>
+
+    <!--<PropertyGroup Condition="'$(TargetFramework)' == 'NET8.0'">
+        <IlcGenerateMapFile>false</IlcGenerateMapFile>
+        <PublishAot>true</PublishAot>
+        <PublishTrimmed>true</PublishTrimmed>
+        <PublishReadyToRun>true</PublishReadyToRun>
+        <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+        <EnableSingleFileAnalyzer>true</EnableSingleFileAnalyzer>
+        <EnableAotAnalyzer>true</EnableAotAnalyzer>
+        <MaxCpuCount Condition="'$(MaxCpuCount)' == ''">0</MaxCpuCount>
+        <TrimMode>partial</TrimMode>
+    </PropertyGroup>-->
+
+</Project>

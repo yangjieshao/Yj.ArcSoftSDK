@@ -1,0 +1,90 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <Import Project="../Package.props" />
+	<PropertyGroup>
+		<RootNamespace>Yj.ArcSoftSDK</RootNamespace>
+		<Platforms>AnyCPU;x64;x86</Platforms>
+	</PropertyGroup>
+
+    <ItemGroup>
+        <Compile Remove="runtimes\**" />
+        <EmbeddedResource Remove="runtimes\**" />
+        <None Remove="runtimes\**" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <Compile Update="ASFFunctions*.cs">
+            <DependentUpon>ASFFunctions.cs</DependentUpon>
+        </Compile>
+        <Compile Update="ASFFunctions_Pro_Linux.*.cs">
+            <DependentUpon>ASFFunctions_Pro_Linux.cs</DependentUpon>
+        </Compile>
+        <Compile Update="ASFFunctions_Pro_Win.*.cs">
+            <DependentUpon>ASFFunctions_Pro_Win.cs</DependentUpon>
+        </Compile>
+        <Compile Update="ASFFunctions_Linux.*.cs">
+            <DependentUpon>ASFFunctions_Linux.cs</DependentUpon>
+        </Compile>
+        <Compile Update="ASFFunctions_Win.*.cs">
+            <DependentUpon>ASFFunctions_Win.cs</DependentUpon>
+        </Compile>
+    </ItemGroup>
+
+    <ItemGroup Condition=" '$(PlatformName)' == 'AnyCPU' And '$(OS)' == 'Windows_NT'">
+        <None Include="runtimes\win-x64_3.0\**" Link="ArcLib\3.0\%(Filename)%(Extension)">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Include="runtimes\win-x64_3.1\**" Link="ArcLib\3.1\%(Filename)%(Extension)">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+    <ItemGroup Condition=" '$(PlatformName)' == 'x86' And '$(OS)' == 'Windows_NT'">
+        <None Include="runtimes\win-x86_3.0\**" Link="ArcLib\3.0\%(Filename)%(Extension)">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Include="runtimes\win-x86_3.1\**" Link="ArcLib\3.1\%(Filename)%(Extension)">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+    <ItemGroup Condition=" '$(PlatformName)' == 'x64' And '$(OS)' == 'Windows_NT'">
+        <None Include="runtimes\win-x64_3.0\**" Link="ArcLib\3.0\%(Filename)%(Extension)">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Include="runtimes\win-x64_3.1\**" Link="ArcLib\3.1\%(Filename)%(Extension)">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup Condition=" '$(PlatformName)' == 'AnyCPU' And '$(OS)' == 'Linux'">
+        <None Include="runtimes\linux-x64_3.0\**" Link="ArcLib\3.0\%(Filename)%(Extension)">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Include="runtimes\linux-x64_3.1\**" Link="ArcLib\3.1\%(Filename)%(Extension)">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+    <ItemGroup Condition=" '$(PlatformName)' == 'x64' And '$(OS)' == 'Linux'">
+        <None Include="runtimes\linux-x64_3.0\**" Link="ArcLib\3.0\%(Filename)%(Extension)">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Include="runtimes\linux-x64_3.1\**" Link="ArcLib\3.1\%(Filename)%(Extension)">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="runtimes\**">
+            <Pack>true</Pack>
+            <PackagePath>runtimes\</PackagePath>
+        </Content>
+        <Content Include="Yj.ArcSoftSDK.targets">
+            <Pack>true</Pack>
+            <PackagePath>build\Yj.ArcSoftSDK.targets</PackagePath>
+        </Content>
+        <Content Include="Readme.md">
+            <Pack>true</Pack>
+            <PackagePath>\</PackagePath>
+        </Content>
+    </ItemGroup>
+
+</Project>

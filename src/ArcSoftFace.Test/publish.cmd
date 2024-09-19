@@ -1,0 +1,1 @@
+dotnet publish -f NET8.0 -r win-x64
