@@ -32,13 +32,19 @@ namespace ArcSoftFace.Test
             {
                 var deviceInfo = ASFFunctions.GetActiveDeviceInfo();
                 Console.WriteLine($"deviceInfo: {deviceInfo}");
-                int retCode = ASFFunctions.Activation(appId: "1212"
-                    , x86SdkKey: "11"
-                    , x64SdkKey: "1212"
-                    , sox64Key: "12"
-                    , x64ProActiveKey: "1212"
-                    , x86ProActiveKey: "13"
-                    , sox64ProActiveKey: "14");
+                Console.WriteLine($"Enter AppId;");
+                var apiId = Console.ReadLine();
+                Console.WriteLine($"Enter SdkKey;");
+                var sdkKey = Console.ReadLine();
+                Console.WriteLine($"Enter ActiveKey;");
+                var activeKey = Console.ReadLine();
+                int retCode = ASFFunctions.Activation(appId: apiId
+                    , x86SdkKey: sdkKey
+                    , x64SdkKey: sdkKey
+                    , sox64Key: sdkKey
+                    , x64ProActiveKey: activeKey
+                    , x86ProActiveKey: activeKey
+                    , sox64ProActiveKey: activeKey);
                 Console.WriteLine($"Activation: {retCode}");
 
                 retCode = ASFFunctions.InitEngine(pEngine: ref _pVideoRGBImageEngine, isImgMode: true, faceMaxNum: 5,
@@ -62,7 +68,7 @@ namespace ArcSoftFace.Test
                                                             needRgbLive: true,
                                                             needIrLive: true,
                                                             needFeatures: true,
-                                                            isRegister: false);
+                                                            isRegister: true);
                 var faceInfos2 = ASFFunctions.DetectFacesEx(_pVideoRGBImageEngine, File.ReadAllBytes("pics/2.jpg"),
                                                             faceMinWith: 0,
                                                             needCheckImage: true,
@@ -70,7 +76,7 @@ namespace ArcSoftFace.Test
                                                             needRgbLive: true,
                                                             needIrLive: true,
                                                             needFeatures: true,
-                                                            isRegister: false);
+                                                            isRegister: true);
 
                 byte[] feature1 = null;// System.IO.File.ReadAllBytes("feature1.dat");
                 foreach (var faceInfo in faceInfos)
