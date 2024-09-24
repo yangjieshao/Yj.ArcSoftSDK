@@ -38,6 +38,44 @@ string keySo64 = Ini.ReadIniData("ArcFace", "KEYSo64", string.Empty);
 
 _ = ASFFunctions.Activation(appId, key32, key64, keySo64, proActiveKey32, proActiveKey64, proActiveKeySo64);
 ````
+
+## 针对部分有多个网卡的Linux系统 （特别是UOS） 每次启动会读取不同网卡mac的情况
+仅针对 v4.0
+首先 禁用全部网卡后 一个个网卡的启用并获取设备信息 注册获取授权文件
+获取到所有网卡的授权文件后
+````csharp
+foreach (var activeFile in ArcSoftConfig.ActiveFiles)
+{
+    activationRet = ASFFunctions_4_0.OfflineActivation(activeFile);
+    if (activationRet == 0)
+    {
+        var initEngine = IntPtr.Zero;
+        var initEngineRet = ASFFunctions_4_0.InitEngine(pEngine: ref initEngine, isImgMode: true, faceMaxNum: 0,
+            isAngleZeroOnly: false, needFaceInfo: false, needRgbLive: false, needIrLive: false,
+            needFaceFeature: false, needImageQuality: false);
+        if(initEngineRet == 0 )
+        {
+            HadActivation = true;
+            Logger.LogInformation("初始化虹软 使用授权文件 激活SDK成功 永久版:true  授权文件地址:{activeFile}", activeFile);
+            ASFFunctions_4_0.UninitEngine(ref initEngine);
+            break;
+        }
+        else if(initEngineRet == 90118)
+        {
+            Logger.LogWarning("初始化虹软 使用授权文件 激活SDK失败 设备不匹配 授权文件地址:{activeFile}", activeFile);
+        }
+        else
+        {
+            Logger.LogWarning("初始化虹软 使用授权文件 激活SDK失败 授权文件地址:{activeFile}  {initEngineRet}", activeFile, initEngineRet);
+        }
+    }
+    else
+    {
+        activationRet = -1;
+    }
+}
+````
+
 ## 初始化人脸引擎
 ````csharp
 
