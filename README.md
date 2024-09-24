@@ -40,8 +40,8 @@ _ = ASFFunctions.Activation(appId, key32, key64, keySo64, proActiveKey32, proAct
 ````
 
 ## 针对部分有多个网卡的Linux系统 （特别是UOS） 每次启动会读取不同网卡mac的情况
-仅针对 v4.0
-首先 禁用全部网卡后 一个个网卡的启用并获取设备信息 注册获取授权文件
+仅针对 v4.0 </br>
+首先 禁用全部网卡后 一个个网卡的启用并获取设备信息 注册获取授权文件 </br>
 获取到所有网卡的授权文件后
 ````csharp
 foreach (var activeFile in ArcSoftConfig.ActiveFiles)
