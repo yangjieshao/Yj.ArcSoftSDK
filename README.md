@@ -44,20 +44,20 @@ _ = ASFFunctions.Activation(appId, key32, key64, keySo64, proActiveKey32, proAct
 首先 禁用全部网卡后 一个个网卡的启用并获取设备信息 注册获取授权文件 </br>
 获取到所有网卡的授权文件后
 ````csharp
+int activationRet = -1;
 foreach (var activeFile in ArcSoftConfig.ActiveFiles)
 {
-    activationRet = ASFFunctions_4_0.OfflineActivation(activeFile);
+    activationRet = ASFFunctions.OfflineActivation(activeFile);
     if (activationRet == 0)
     {
         var initEngine = IntPtr.Zero;
-        var initEngineRet = ASFFunctions_4_0.InitEngine(pEngine: ref initEngine, isImgMode: true, faceMaxNum: 0,
+        var initEngineRet = ASFFunctions.InitEngine(pEngine: ref initEngine, isImgMode: true, faceMaxNum: 0,
             isAngleZeroOnly: false, needFaceInfo: false, needRgbLive: false, needIrLive: false,
             needFaceFeature: false, needImageQuality: false);
         if(initEngineRet == 0 )
         {
-            HadActivation = true;
             Logger.LogInformation("初始化虹软 使用授权文件 激活SDK成功 永久版:true  授权文件地址:{activeFile}", activeFile);
-            ASFFunctions_4_0.UninitEngine(ref initEngine);
+            ASFFunctions.UninitEngine(ref initEngine);
             break;
         }
         else if(initEngineRet == 90118)
