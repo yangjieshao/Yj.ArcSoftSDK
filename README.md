@@ -21,10 +21,8 @@ Linux 部署
 
 例：
 ```
-ln /home/app/ArcProLib/Sox64_4.0/libarcsoft_face.so  /usr/lib/libarcsoft_face.so
-ln /home/app/ArcProLib/Sox64_4.0/libarcsoft_face_engine.so  /usr/lib/libarcsoft_face_engine.so
-ln /home/app/ArcProLib/Sox64_4.0/libarcsoft_face.so  /usr/lib64/libarcsoft_face.so
-ln /home/app/ArcProLib/Sox64_4.0/libarcsoft_face_engine.so  /usr/lib64/libarcsoft_face_engine.so
+cp -Rf /usr/Projects/ArcLib/4.0/* /usr/lib64
+cp -Rf /usr/Projects/ArcLib/4.0/* /usr/lib
 ```
 
 ## 初始化虹软人脸sdk
