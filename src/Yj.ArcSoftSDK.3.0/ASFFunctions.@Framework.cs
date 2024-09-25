@@ -12,6 +12,74 @@ namespace Yj.ArcSoftSDK
     public static partial class ASFFunctions
     {
         /// <summary>
+        /// 采集当前设备信息
+        /// </summary>
+        public static string GetActiveDeviceInfo()
+        {
+            var deviceInfo = IntPtr.Zero;
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+             && (RuntimeInformation.ProcessArchitecture == Architecture.X64
+                || RuntimeInformation.ProcessArchitecture == Architecture.X86))
+            {
+                _ = ASFFunctions_Pro_Win.ASFGetActiveDeviceInfo(ref deviceInfo);
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
+                && RuntimeInformation.ProcessArchitecture == Architecture.X64)
+            {
+                _ = ASFFunctions_Pro_Linux.ASFGetActiveDeviceInfo(ref deviceInfo);
+            }
+            else
+            {
+                throw new NotSupportedException("Only supported Windows x86 x64 and Linux x64");
+            }
+            return MemoryUtil.PtrToString(deviceInfo);
+        }
+
+        /// <summary>
+        /// 离线激活
+        /// </summary>
+        /// <param name="activationFilePath">许可文件路径</param>
+        public static int OfflineActivation(string activationFilePath)
+        {
+            if (string.IsNullOrWhiteSpace(activationFilePath)
+                || !System.IO.File.Exists(activationFilePath))
+            {
+                return -1;
+            }
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+             && (RuntimeInformation.ProcessArchitecture == Architecture.X64
+                || RuntimeInformation.ProcessArchitecture == Architecture.X86))
+            {
+                var result = ASFFunctions_Pro_Win.ASFOfflineActivation(activationFilePath);
+                if (result == 0
+                    || result == 0x16002 /* SDK已激活 */
+                    || result == 0x19007 /* 离线授权文件不可用，本地原有激活文件可继续使用 */)
+                {
+                    return 0;
+                }
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
+                && RuntimeInformation.ProcessArchitecture == Architecture.X64)
+            {
+                var result = ASFFunctions_Pro_Linux.ASFOfflineActivation(activationFilePath);
+                if (result == 0
+                    || result == 0x16002 /* SDK已激活 */
+                    || result == 0x19007 /* 离线授权文件不可用，本地原有激活文件可继续使用 */)
+                {
+                    IsPro = true;
+                    return 0;
+                }
+            }
+            else
+            {
+                throw new NotSupportedException("Only supported Windows x86 x64 and Linux x64");
+            }
+            return -1;
+        }
+
+
+        /// <summary>
         /// 激活SDK
         /// </summary>
         /// <param name="appId"></param>

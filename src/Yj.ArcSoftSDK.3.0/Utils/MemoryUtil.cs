@@ -7,6 +7,15 @@ namespace Yj.ArcSoftSDK.Utils
     /// </summary>
     internal static class MemoryUtil
     {
+        public static string PtrToString(IntPtr intPtr)
+        {
+            if (intPtr == IntPtr.Zero)
+            {
+                return string.Empty;
+            }
+            return Marshal.PtrToStringAnsi(intPtr);
+        }
+
         /// <summary>
         /// 申请内存
         /// </summary>

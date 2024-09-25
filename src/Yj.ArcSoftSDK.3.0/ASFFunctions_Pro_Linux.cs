@@ -13,6 +13,23 @@ namespace Yj.ArcSoftSDK
         private const string Dll_PATH = "libarcsoft_face_engine.so";
 #if !NET7_0_OR_GREATER
         /// <summary>
+        /// 采集当前设备信息
+        /// </summary>
+        /// <param name="deviceInfo">返回设备信息</param>
+        /// <returns>调用结果</returns>
+        [DllImport(Dll_PATH, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int ASFGetActiveDeviceInfo(ref IntPtr deviceInfo);
+
+
+        /// <summary>
+        /// 离线激活SDK
+        /// </summary>
+        /// <param name="filePath">许可文件路径(虹软开放平台开发者中心端获取的文件)</param>
+        /// <returns>调用结果</returns>
+        [DllImport(Dll_PATH, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
+        public static extern int ASFOfflineActivation(string filePath);
+
+        /// <summary>
         /// 激活人脸识别SDK引擎函数
         /// </summary>
         /// <param name="appId">SDK对应的AppID</param>

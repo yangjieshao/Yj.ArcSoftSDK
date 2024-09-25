@@ -8,6 +8,22 @@ namespace Yj.ArcSoftSDK
     internal static partial class ASFFunctions_Pro_Linux
     {
         /// <summary>
+        /// 采集当前设备信息
+        /// </summary>
+        /// <param name="deviceInfo">返回设备信息</param>
+        /// <returns>调用结果</returns>
+        [LibraryImport(Dll_PATH, SetLastError = true, StringMarshalling = StringMarshalling.Utf8)]
+        internal static partial int ASFGetActiveDeviceInfo(ref IntPtr deviceInfo);
+
+        /// <summary>
+        /// 离线激活SDK
+        /// </summary>
+        /// <param name="filePath">许可文件路径(虹软开放平台开发者中心端获取的文件)</param>
+        /// <returns>调用结果</returns>
+        [LibraryImport(Dll_PATH, SetLastError = true, StringMarshalling = StringMarshalling.Utf8)]
+        internal static partial int ASFOfflineActivation(string filePath);
+
+        /// <summary>
         /// 激活人脸识别SDK引擎函数
         /// </summary>
         /// <param name="appId">SDK对应的AppID</param>

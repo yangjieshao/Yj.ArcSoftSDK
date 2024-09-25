@@ -10,6 +10,39 @@ namespace Yj.ArcSoftSDK
     public static partial class ASFFunctions
     {
         /// <summary>
+        /// 采集当前设备信息  仅3.1有效
+        /// </summary>
+        public static string GetActiveDeviceInfo()
+        {
+            var deviceInfo = IntPtr.Zero;
+            _ = ASFFunctions_Pro_Win.ASFGetActiveDeviceInfo(ref deviceInfo);
+            return MemoryUtil.PtrToString(deviceInfo);
+        }
+
+        /// <summary>
+        /// 离线激活  仅3.1有效
+        /// </summary>
+        /// <param name="activationFilePath">许可文件路径</param>
+        public static int OfflineActivation(string activationFilePath)
+        {
+            if (string.IsNullOrWhiteSpace(activationFilePath)
+                || !System.IO.File.Exists(activationFilePath))
+            {
+                return -1;
+            }
+
+            var result = ASFFunctions_Pro_Win.ASFOfflineActivation(activationFilePath);
+            if (result == 0
+                || result == 0x16002 /* SDK已激活 */
+                || result == 0x19007 /* 离线授权文件不可用，本地原有激活文件可继续使用 */)
+            {
+                IsPro = true;
+                return 0;
+            }
+            return -1;
+        }
+
+        /// <summary>
         /// 激活SDK
         /// </summary>
         /// <param name="appId"></param>
