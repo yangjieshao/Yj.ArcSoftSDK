@@ -20,9 +20,12 @@ Linux 部署
 创建软连接到要使用的虹软库文件
 
 例：
-```
-ln -s /usr/FaceCheck.Server/ArcLib.22/4.0/* /usr/lib64/
-ln -s /usr/FaceCheck.Server/ArcLib.22/4.0/* /usr/lib
+``` 
+ln -s /usr/FaceCheck.Server/ArcLib/4.0/libarcsoft_face_engine.so /usr/lib64/libarcsoft_face_engine.so
+ln -s /usr/FaceCheck.Server/ArcLib/4.0/libarcsoft_face.so /usr/lib64/libarcsoft_face.so
+
+ln -s /usr/FaceCheck.Server/ArcLib/4.0/libarcsoft_face_engine.so /usr/lib/libarcsoft_face_engine.so
+ln -s /usr/FaceCheck.Server/ArcLib/4.0/libarcsoft_face.so /usr/lib/libarcsoft_face.so
 ```
 
 ## 初始化虹软人脸sdk
