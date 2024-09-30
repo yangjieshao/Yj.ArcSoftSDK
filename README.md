@@ -21,8 +21,8 @@ Linux 部署
 
 例：
 ```
-cp -Rf /usr/Projects/ArcLib/4.0/* /usr/lib64
-cp -Rf /usr/Projects/ArcLib/4.0/* /usr/lib
+ln -s /usr/FaceCheck.Server/ArcLib.22/4.0/* /usr/lib64/
+ln -s /usr/FaceCheck.Server/ArcLib.22/4.0/* /usr/lib
 ```
 
 ## 初始化虹软人脸sdk
